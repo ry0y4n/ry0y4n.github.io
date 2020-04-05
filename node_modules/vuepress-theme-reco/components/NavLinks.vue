@@ -76,14 +76,14 @@ export default {
       const blogConfig = this.$themeConfig.blogConfig || {}
       const isHasCategory = userNav.some(item => {
         if (blogConfig.category) {
-          return item.text === (blogConfig.category.text || '分类')
+          return item.text === (blogConfig.category.text || 'カテゴリー')
         } else {
           return true
         }
       })
       const isHasTag = userNav.some(item => {
         if (blogConfig.tag) {
-          return item.text === (blogConfig.tag.text || '标签')
+          return item.text === (blogConfig.tag.text || 'タグ')
         } else {
           return true
         }
@@ -98,7 +98,7 @@ export default {
             item.text = item.name
             return item
           }),
-          text: category.text || '分类',
+          text: category.text || 'カテゴリー',
           type: 'links',
           icon: 'reco-category'
         })
@@ -107,7 +107,7 @@ export default {
         const tag = blogConfig.tag
         userNav.splice(parseInt(tag.location || 3) - 1, 0, {
           link: '/tag/',
-          text: tag.text || '标签',
+          text: tag.text || 'タグ',
           type: 'links',
           icon: 'reco-tag'
         })
