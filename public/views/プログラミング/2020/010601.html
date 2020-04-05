@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発① | Momo Blog</title>
+    <meta name="description" content="モモスケが日々考えていることを落としておくためのサイト">
+    <meta name="generator" content="VuePress 1.4.0">
+    <link rel="icon" href="/favicon.ico">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.5c74a05d.css" as="style"><link rel="preload" href="/assets/js/app.944e48b4.js" as="script"><link rel="preload" href="/assets/js/3.d0efcf80.js" as="script"><link rel="preload" href="/assets/js/1.72bd620a.js" as="script"><link rel="preload" href="/assets/js/14.b7b71e4f.js" as="script"><link rel="prefetch" href="/assets/js/10.dada526e.js"><link rel="prefetch" href="/assets/js/11.1bc3e37d.js"><link rel="prefetch" href="/assets/js/12.2f0e9de0.js"><link rel="prefetch" href="/assets/js/13.62edc1f4.js"><link rel="prefetch" href="/assets/js/15.005163b2.js"><link rel="prefetch" href="/assets/js/16.fed232e5.js"><link rel="prefetch" href="/assets/js/17.4bcb1572.js"><link rel="prefetch" href="/assets/js/18.e14cf10a.js"><link rel="prefetch" href="/assets/js/19.9a9f2846.js"><link rel="prefetch" href="/assets/js/20.ab8d6f4e.js"><link rel="prefetch" href="/assets/js/21.f0865c8e.js"><link rel="prefetch" href="/assets/js/22.c81d4953.js"><link rel="prefetch" href="/assets/js/23.e6506db1.js"><link rel="prefetch" href="/assets/js/24.931fd0cf.js"><link rel="prefetch" href="/assets/js/4.b9284745.js"><link rel="prefetch" href="/assets/js/5.e2d29f6f.js"><link rel="prefetch" href="/assets/js/6.c6e053a6.js"><link rel="prefetch" href="/assets/js/7.23055e62.js"><link rel="prefetch" href="/assets/js/8.5efb252e.js"><link rel="prefetch" href="/assets/js/9.a25b1e53.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.5c74a05d.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div><div class="theme-container" data-v-319dd33c><div data-v-319dd33c><div id="loader-wrapper" class="loading-wrapper" data-v-4b73742e data-v-319dd33c data-v-319dd33c><div class="loader-main" data-v-4b73742e><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div><div data-v-4b73742e></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-1e2a0cc0 data-v-319dd33c data-v-319dd33c><h3 class="title" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0>Momo Blog</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0><input type="password" value="" data-v-1e2a0cc0> <span data-v-1e2a0cc0>Konck! Knock!</span> <button data-v-1e2a0cc0>OK</button></label> <div class="footer" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0><span data-v-1e2a0cc0><i class="iconfont reco-theme" data-v-1e2a0cc0></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-1e2a0cc0>vuePress-theme-reco</a></span> <span data-v-1e2a0cc0><i class="iconfont reco-copyright" data-v-1e2a0cc0></i> <a data-v-1e2a0cc0><span data-v-1e2a0cc0>momosuke</span>
+            
+          <span data-v-1e2a0cc0>2017 - </span>
+          2020
+        </a></span></div></div> <div class="hide" data-v-319dd33c><header class="navbar" data-v-319dd33c><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Momo Blog" class="logo"> <span class="site-name">Momo Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="iconfont undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="iconfont undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="iconfont undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="iconfont undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-319dd33c></div> <aside class="sidebar" data-v-319dd33c><div class="personal-info-wrapper" data-v-795d62a8><img src="/sushi.JPG" alt="author-avatar" class="personal-img" data-v-795d62a8> <h3 class="name" data-v-795d62a8>
+    momosuke
+  </h3> <div class="num" data-v-795d62a8><div data-v-795d62a8><h3 data-v-795d62a8>12</h3> <h6 data-v-795d62a8>articles</h6></div> <div data-v-795d62a8><h3 data-v-795d62a8>21</h3> <h6 data-v-795d62a8>tags</h6></div></div> <hr data-v-795d62a8></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="iconfont undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="iconfont undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="iconfont undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="iconfont undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#はじめに" class="sidebar-link">はじめに</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#技術仕様" class="sidebar-link">技術仕様</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#事前知識" class="sidebar-link">事前知識</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#全体図" class="sidebar-link">全体図</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#セットアップ" class="sidebar-link">セットアップ</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#navbarコンポネント" class="sidebar-link">Navbarコンポネント</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#signedinlinks-signedoutlinksコンポネント" class="sidebar-link">SignedInLinks &amp; SignedOutLinksコンポネント</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#dashboardコンポネント" class="sidebar-link">Dashboardコンポネント</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#projectdetailsコンポネント" class="sidebar-link">ProjectDetailsコンポネント</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#signin-signupコンポネント" class="sidebar-link">SignIn &amp; SignUpコンポネント</a><ul class="sidebar-sub-headers"></ul></li><li><a href="/views/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0/2020/010601.html#createprojectコンポネント" class="sidebar-link">CreateProjectコンポネント</a><ul class="sidebar-sub-headers"></ul></li></ul></section></li></ul> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-1e2a0cc0 data-v-319dd33c><h3 class="title" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</h3> <!----> <label id="box" class="inputBox" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0><input type="password" value="" data-v-1e2a0cc0> <span data-v-1e2a0cc0>Konck! Knock!</span> <button data-v-1e2a0cc0>OK</button></label> <div class="footer" style="display:none;" data-v-1e2a0cc0 data-v-1e2a0cc0><span data-v-1e2a0cc0><i class="iconfont reco-theme" data-v-1e2a0cc0></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-1e2a0cc0>vuePress-theme-reco</a></span> <span data-v-1e2a0cc0><i class="iconfont reco-copyright" data-v-1e2a0cc0></i> <a data-v-1e2a0cc0><span data-v-1e2a0cc0>momosuke</span>
+            
+          <span data-v-1e2a0cc0>2017 - </span>
+          2020
+        </a></span></div></div> <div data-v-319dd33c><main class="page"><div class="page-title" style="display:none;"><h1>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</h1> <hr> <div data-v-484a899e><i class="iconfont reco-account" data-v-484a899e><span data-v-484a899e>momosuke</span></i> <i class="iconfont reco-date" data-v-484a899e><span data-v-484a899e>2020-01-06</span></i> <!----> <i class="iconfont reco-tag tags" data-v-484a899e><span class="tag-item" data-v-484a899e>
+      React
+    </span><span class="tag-item" data-v-484a899e>
+      Redux
+    </span><span class="tag-item" data-v-484a899e>
+      Firebase
+    </span></i></div></div> <div class="theme-reco-content content__default" style="display:none;"><h2 id="はじめに"><a href="#はじめに" class="header-anchor">#</a> はじめに</h2> <p>react,reduxを学習もひと段落してきて実際に開発しようと思ったが，機械系高専生はバックエンドを知らなかった．そこで調べていくうちにfirebase使ってサーバーレスなアプリが作れることがわかった．
+firebaseのいい教材はないものかと探しているうちに1つのYouTubeプレイリストを発見した．</p> <p><a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9iWstfXntcj8f-dFZ4UtlN3" target="_blank" rel="noopener noreferrer">React, Redux &amp; Firebase App Tutorial<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>何を隠そうこの記事はこのプレイリストを翻訳・まとめたものである．英語が苦手な自分には40もある再生リストを一時停止しながら進めるのはすごく時間がかかった．なので同族のためにも僕がやっておこうと思った．自分偉いなんて1ピコも思ってない．</p> <p>かなり長くなるのでプレイリスト10ずつで記事も区切っていくことにした．</p> <p><a href="">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</a>　←今ここ！！！</p> <p><a href="/views/プログラミング/2020/010701.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発②</a></p> <p><a href="/views/プログラミング/2020/010801.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発③</a></p> <p><a href="/views/プログラミング/2020/010901.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④</a></p> <h2 id="技術仕様"><a href="#技術仕様" class="header-anchor">#</a> 技術仕様</h2> <p>今回のアプリは以下のフレームワーク，サービスで開発される</p> <ul><li>React &amp; Redux</li> <li>Thunk</li> <li>Firebase</li> <li>Cloud Firestore</li> <li>Authentication</li> <li>Hosting</li> <li>Cloud Function</li></ul> <p>ちなみに完成したものがこちら（3分クッキング）
+<a href="https://momosuke-momoplan.firebaseapp.com" target="_blank" rel="noopener noreferrer">Momo Plan<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></p> <p>適当にサインアップしてプロジェクトを追加してみてください．
+(テスト用アカウント：email: test@gmail.com, password: test1234)</p> <h2 id="事前知識"><a href="#事前知識" class="header-anchor">#</a> 事前知識</h2> <p>以下の知識があると記事の内容をスムーズに理解できる．</p> <ul><li>Reactの基礎</li> <li>Reduxの基礎</li> <li>JavaScript &amp; HTML</li></ul> <h2 id="全体図"><a href="#全体図" class="header-anchor">#</a> 全体図</h2> <img width="1024" alt="IMG_7E516210EBC3-1.jpeg" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/8c794fe5-7c9e-7698-c588-b4945b39e9a9.jpeg"> <p>クラインアントサイドで動くReduxを使ってReactアプリを作成していき，リアルタイムデータをFirebase(Firestore db)に保管していく．
+Firebase Authを使ってログイン機能を実装し，最後にサーバー側で実行される関数を設定できるCloud Fuctionを利用する．</p> <p>下画像は各コンポネントの概略図．
+<img src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/4d525317-09b6-888e-5d75-c47ac2a0f7aa.png" alt="IMG_0089.PNG"></p> <p>create-react-appでrootコンポネントを作成し，全リンク共通のNavコンポネントを作成．その中にはログイン中に表示したいSigned in linksとその逆のSigned out linksを作成する．</p> <p>その後ルート別のメインコンポネントを作成していくという流れで今回はアプリの外面をReactで作っていく．</p> <h2 id="セットアップ"><a href="#セットアップ" class="header-anchor">#</a> セットアップ</h2> <p>今回はコードエディタに<a href="https://azure.microsoft.com/ja-jp/products/visual-studio-code/" target="_blank" rel="noopener noreferrer">Visual Studio Code<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>を利用する．エディタ内にターミナルを展開できるのが便利．</p> <p>それではアプリを作っていく．<code>create-react-app</code>をインストールしなくてもいいように<code>npm</code> でなく<code>npx</code>を使う．</p> <div class="language-terminal. line-numbers-mode"><pre class="language-text"><code>npx create-react-app marioplan
+cd marioplan
+npm start
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p><code>create-react-app</code>で作られたダミープロジェクトが表示されればひとまずOK．
+<img width="1680" alt="スクリーンショット 2019-10-21 22.53.38.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/54ea7ee0-e13d-386c-b5cc-32d2f33baf8e.png"></p> <p>次にrootコンポネントであるApp.jsを開き，いらないところを削除して下記のようにする．
+そしてsrc/App.cssも削除．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+
+function App() {
+  return (
+    &lt;div className=&quot;App&quot;&gt;
+      &lt;h1&gt;Mario Plan&lt;/h1&gt;
+    &lt;/div&gt;
+  );
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><p>CSSに注力したくないので<a href="https://materializecss.com/" target="_blank" rel="noopener noreferrer">MaterializedCSS<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>を使う．
+これから出てくるコンポネントのクラス名<code>className</code>はほぼ全てMaterialized CSS用のものなので詳しく知りたい人は公式ドキュメントを参照推奨．
+public/index.htmlに以下のコードを挿入．</p> <div class="language-public/index.html line-numbers-mode"><pre class="language-text"><code>&lt;!--Import Google Icon Font--&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/icon?family=Material+Icons&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;!--Import materialize.css--&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css&quot;&gt;
+
+↑ は&lt;title&gt;の直前に挿入
+↓ は&lt;body&gt;の最後に挿入
+
+&lt;!-- Compiled and minified JavaScript --&gt;
+&lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js&quot;&gt;&lt;/script&gt;
+            
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br></div></div><h2 id="navbarコンポネント"><a href="#navbarコンポネント" class="header-anchor">#</a> Navbarコンポネント</h2> <p>ここからコンポネントを作っていく．
+srcフォルダにcomponentsフォルダを作成し,以下のように諸々のフォルダや空ファイルを作成しておく．</p> <p>修正：ProjectDetail.js → ProjectDetails.js　
+<img width="167" alt="スクリーンショット 2019-10-21 23.33.15.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/6eede91e-7765-3836-9a32-2b7c340b2a1c.png"></p> <p>ルート管理のためにreact-router-domをインストールする．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>cd marioplan
+npm install react-router-dom
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>App.js内でインポートして中身も少しいじる．<code>BrowserRouter</code>で囲むことによって今後追加するルート処理が可能になる．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;h1&gt;Mario Plan&lt;/h1&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>次にNavbar.jsを書き込む．</p> <div class="language-layout/Navbar.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { Link } from 'react-router-dom'
+
+const Navbar = () =&gt; { 
+    return (
+        &lt;nav className=&quot;nav-wrapper grey darken-3&quot;&gt; 
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;Link to='/' className=&quot;brand-logo&quot;&gt;MarioPlan&lt;/Link&gt; // 画面遷移のためのタグ
+            &lt;/div&gt;
+        &lt;/nav&gt;
+    )
+}
+
+export default Navbar;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br></div></div><p>App.jsで読み込む．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { BrowserRouter } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;Navbar /&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br></div></div><p><code>npm start</code>で確認するとこんな感じ．Materialized cssがいい仕事してる．
+<img width="1677" alt="スクリーンショット 2019-10-22 14.04.58.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/a5807238-f2e7-1703-0c43-f372dc46b198.png"></p> <h2 id="signedinlinks-signedoutlinksコンポネント"><a href="#signedinlinks-signedoutlinksコンポネント" class="header-anchor">#</a> SignedInLinks &amp; SignedOutLinksコンポネント</h2> <p>次にNavbarに表示するコンポネントとしてログインしている時に見えていて欲しい<code>SignedInLinks</code>と，していないときに見えて欲しい<code>SignedOutLinks</code>を書いていく．まずは両方表示して後半で改良していく．</p> <div class="language-layout/SignedInLinks.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+const SignedInLinks = () =&gt; {
+    return (
+            &lt;ul className=&quot;right&quot;&gt;
+            &lt;li&gt;&lt;NavLink to='/'&gt;New Project&lt;/NavLink&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;NavLink to='/'&gt;Log Out&lt;/NavLink&gt;&lt;/li&gt;
+            // 作業段階にて下の行で'NN'を忘れたので下画像で円内に'NN'が表示されてませんが
+            // 表示されているのが正常なので悪しからず．
+            &lt;li&gt;&lt;NavLink to='/' className=&quot;btn btn-floating pink lighten-1&quot;&gt;NN&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    )
+}
+
+export default SignedInLinks;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><div class="language-layout/SignedOutLinks.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { NavLink } from 'react-router-dom'
+
+const SignedOutLinks = () =&gt; {
+    return (
+            &lt;ul className=&quot;right&quot;&gt;
+            &lt;li&gt;&lt;NavLink to='/'&gt;Signup&lt;/NavLink&gt;&lt;/li&gt;
+            &lt;li&gt;&lt;NavLink to='/'&gt;Log In&lt;/NavLink&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+    )
+}
+
+export default SignedOutLinks;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>Navbar.jsで読み込む</p> <div class="language-layout/Navbar.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { Link } from 'react-router-dom'
+import SignedInLinks from './SignedInLinks'
+import SignedOutLinks from './SignedOutLinks'
+
+
+const Navbar = () =&gt; {
+    return (
+        &lt;nav className=&quot;nav-wrapper grey darken-3&quot;&gt;
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;Link to='/' className=&quot;brand-logo&quot;&gt;MarioPlan&lt;/Link&gt;
+                &lt;SignedInLinks /&gt;
+                &lt;SignedOutLinks /&gt;
+            &lt;/div&gt;
+        &lt;/nav&gt;
+    )
+}
+
+export default Navbar;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><img width="1677" alt="スクリーンショット 2019-10-22 14.19.26.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/1be43ca4-ee6c-c756-0700-dc553111f60f.png"> <h2 id="dashboardコンポネント"><a href="#dashboardコンポネント" class="header-anchor">#</a> Dashboardコンポネント</h2> <p>次にDashboardを作っていく．その前にラップするProjectList,Notificationsを書いていく．</p> <div class="language-projects/ProjectList.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const ProjectList = () =&gt; {
+    return (
+        &lt;div className=&quot;project-list section&quot;&gt;
+
+            // ダミープロジェクトを3つ作っておく．
+
+            &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+                &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Project Title&lt;/span&gt;
+                    &lt;p&gt;Posted by the Net Ninja&lt;/p&gt;
+                    &lt;p className=&quot;grey-text&quot;&gt;3rd September&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+                &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Project Title&lt;/span&gt;
+                    &lt;p&gt;Posted by the Net Ninja&lt;/p&gt;
+                    &lt;p className=&quot;grey-text&quot;&gt;3rd September&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+                &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Project Title&lt;/span&gt;
+                    &lt;p&gt;Posted by the Net Ninja&lt;/p&gt;
+                    &lt;p className=&quot;grey-text&quot;&gt;3rd September&lt;/p&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectList;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br></div></div><div class="language-dashboard/Notifications.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const Notification = () =&gt; {
+    return (
+        &lt;div&gt;
+　　　　　　　// 通知の表示はfirebaseとの連携が必要なので結構後半で構うまでは適当にpタグで我慢．．．
+            &lt;p&gt;Notification&lt;/p&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default Notification;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>これらを読み込む形でDashboard.jsを作成していく．</p> <div class="language-dashboard/Dashboard.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import Notification from './Notification'
+import ProjectList from '../projects/ProjectList'
+
+class Dashboard extends Component {
+    render() {
+        return (
+            &lt;div className=&quot;dashboard container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col s12 m6&quot;&gt;
+                        &lt;ProjectList /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;col s12 m5 offset-m1&quot;&gt;
+                        &lt;Notification /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+export default Dashboard;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>このDashboardコンポネントをApp.jsで読み込む．<code>Switch</code>を使えばルート管理ができる．タグ内で<code>Route</code>タグで各ルートのpathとレンダリングするcomponentを設置できる．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;Navbar /&gt;
+          &lt;Switch&gt;
+            &lt;Route path='/' component={Dashboard} /&gt;
+          &lt;/Switch&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p><code>npm start</code>するとこんな感じ．</p> <img width="1677" alt="スクリーンショット 2019-10-22 15.29.26.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/494a713c-85e9-d8e4-ef7e-236a34d2b352.png"> <p>ProjectList.jsでプロジェクトが羅列してあるのは非効率なのでProjectSummary.jsにモジュール化していく．</p> <div class="language-projects/ProjectSummary.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const ProjectSummary = () =&gt; {
+    return (
+        &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+            &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                &lt;span className=&quot;card-title&quot;&gt;Project Title&lt;/span&gt;
+                &lt;p&gt;Posted by the Net Ninja&lt;/p&gt;
+                &lt;p className=&quot;grey-text&quot;&gt;3rd September&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectSummary;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>ProjectList.jsで読み込む．</p> <div class="language-projects/ProjectList.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import ProjectSummary from './ProjectSummary'
+
+const ProjectList = () =&gt; {
+    return (
+        &lt;div className=&quot;project-list section&quot;&gt;
+            &lt;ProjectSummary /&gt;
+            &lt;ProjectSummary /&gt;
+            &lt;ProjectSummary /&gt;
+            &lt;ProjectSummary /&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectList;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><h2 id="projectdetailsコンポネント"><a href="#projectdetailsコンポネント" class="header-anchor">#</a> ProjectDetailsコンポネント</h2> <p>次にプロジェクトをクリックしたら表示されるProjectDetailコンポネントを作成していく．
+このコンポネントには<code>/project/:id</code>というpathでアクセスするのだが，propsにはそのidパラメータが渡される．今回は<code>props.match.params.id</code>で取得できる．他に参照したい値があれば適宜<code>console.log(props)</code>などで確認してみよう．</p> <div class="language-projects/ProjectDetails.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import ProjectSummary from './ProjectSummary'
+
+const ProjectDetails = (props) =&gt; {
+    const id = props.match.params.id;
+    return (
+        &lt;div className=&quot;container section project-details&quot;&gt;
+            &lt;div className=&quot;card z-depth-0&quot;&gt;
+                &lt;div className=&quot;card-content&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Project Title - {id}&lt;/span&gt;
+                    &lt;p&gt;Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptatibus consectetur, adipisci in, corrupti corporis omnis, maxime assumenda nisi expedita eius libero tempora totam officiis. Tenetur repellat accusamus excepturi aspernatur sint?&lt;/p&gt;
+                &lt;/div&gt;
+                &lt;div className=&quot;card-action gret lighten-4 grey-text&quot;&gt;
+                    &lt;div&gt;Posted by The Net Ninja&lt;/div&gt;
+                    &lt;div&gt;2nd, September, 2am&lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectDetails;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><p>App.jsで読み込む．
+注意点として，pathが<code>/</code>のところに<code>exact</code>を付けないと<code>/project/3</code>のようなものにも反応して<code>Dashboard</code>に遷移してしまう．
+またpathが<code>/project/:id</code>で<code>id</code>を受け取っている．これによりプロジェクトの分別を可能にする．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
+import ProjectDetails from './components/projects/ProjectDetails'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;Navbar /&gt;
+          &lt;Switch&gt;
+            &lt;Route exact path='/' component={Dashboard} /&gt;
+            &lt;Route path='/project/:id' component={ProjectDetails} /&gt;
+          &lt;/Switch&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p>pathを<code>/project/3</code>での画面はこんな感じ．（とりあえず今はidをproject title後ろに反映させておくだけ）
+<img width="1677" alt="スクリーンショット 2019-10-22 17.05.31.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/b160cd07-cbd9-2d54-44dc-5b32e21f7a89.png"></p> <h2 id="signin-signupコンポネント"><a href="#signin-signupコンポネント" class="header-anchor">#</a> SignIn &amp; SignUpコンポネント</h2> <p>次にSignIn, SignUpコンポネントを作成していく．</p> <div class="language-auth/SignIn.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+
+class SignIn extends Component {
+    state = {
+        email: '',
+        password: ''
+    }
+    handleChange = (e) =&gt; {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) =&gt; {
+        e.preventDefault()
+        console.log(this.state)
+    }
+    render() {
+        return (
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;form onSubmit={this.handleSubmit} className=&quot;white&quot;&gt;
+                    &lt;h5 className=&quot;grey-text text-darken-3&quot;&gt;Sign In&lt;/h5&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;email&quot;&gt;Email&lt;/label&gt;
+                        &lt;input type=&quot;email&quot; id=&quot;email&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;password&quot;&gt;Password&lt;/label&gt;
+                        &lt;input type=&quot;password&quot; id=&quot;password&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;button className=&quot;btn pink lighten-1 z-depth-0&quot;&gt;Login&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+export default SignIn
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><div class="language-auth/SignUp.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+
+class SignUp extends Component {
+    state = {
+        email: '',
+        password: '',
+        firstName: '',
+        lastName: ''
+    }
+    handleChange = (e) =&gt; {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) =&gt; {
+        e.preventDefault()
+        console.log(this.state)
+    }
+    render() {
+        return (
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;form onSubmit={this.handleSubmit} className=&quot;white&quot;&gt;
+                    &lt;h5 className=&quot;grey-text text-darken-3&quot;&gt;Sign Up&lt;/h5&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;email&quot;&gt;Email&lt;/label&gt;
+                        &lt;input type=&quot;email&quot; id=&quot;email&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;password&quot;&gt;Password&lt;/label&gt;
+                        &lt;input type=&quot;password&quot; id=&quot;password&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;firstName&quot;&gt;First Name&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; id=&quot;firstName&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;lastName&quot;&gt;Last Name&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; id=&quot;lastName&quot; onChange={this.handleChange}/&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;button className=&quot;btn pink lighten-1 z-depth-0&quot;&gt;Sign up&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+export default SignUp;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br></div></div><p>どちらも入力内容をstateで保管するようにしている．送信ボタンで<code>console.log</code>されるようにしたのでApp.jsで読み込んで適当にsign in, sign upしてコンソール画面を確認してみよう．今後ログに出すだけでなく．firestoreに保管するように改良する．ちなみに<code>preventDefault()</code>はボタンが押されてもページがリロードされないためのもの．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
+import ProjectDetails from './components/projects/ProjectDetails'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;Navbar /&gt;
+          &lt;Switch&gt;
+            &lt;Route exact path='/' component={Dashboard} /&gt;
+            &lt;Route path='/project/:id' component={ProjectDetails} /&gt;
+            &lt;Route path='/signin' component={SignIn} /&gt;
+            &lt;Route path='/signup' component={SignUp} /&gt;
+          &lt;/Switch&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br></div></div><img width="1677" alt="スクリーンショット 2019-10-22 17.42.49.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/42a62d79-4bea-4429-4985-1ce497599e32.png"> <img width="1677" alt="スクリーンショット 2019-10-22 17.43.14.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/da298ca3-8df4-ad31-3dc3-108b2ae84e2a.png"> <h2 id="createprojectコンポネント"><a href="#createprojectコンポネント" class="header-anchor">#</a> CreateProjectコンポネント</h2> <p>次にCreateProjectコンポネントを作成していく．</p> <div class="language-projects/CreateProject.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+
+class CreateProject extends Component {
+    state = {
+        title: '',
+        content: ''
+    }
+    handleChange = (e) =&gt; {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) =&gt; {
+        e.preventDefault()
+        console.log(this.state)
+    }
+    render() {
+        return (
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;form onSubmit={this.handleSubmit} className=&quot;white&quot;&gt;
+                    &lt;h5 className=&quot;grey-text text-darken-3&quot;&gt;Create new project&lt;/h5&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;title&quot;&gt;Title&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; id=&quot;title&quot; onChange={this.handleChange} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;content&quot;&gt;Project Content&lt;/label&gt;
+                        &lt;textarea id=&quot;content&quot; className=&quot;materialize-textarea&quot; onChange={this.handleChange}&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;button className=&quot;btn pink lighten-1 z-depth-0&quot;&gt;Create&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+export default CreateProject
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p>今までと同様にApp.jsで読み込んで<code>/create</code>にアクセスしてみよう．</p> <div class="language-src/App.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import Navbar from './components/layout/Navbar'
+import Dashboard from './components/dashboard/Dashboard'
+import ProjectDetails from './components/projects/ProjectDetails'
+import SignIn from './components/auth/SignIn'
+import SignUp from './components/auth/SignUp'
+import CreateProject from './components/projects/CreateProject'
+
+class App extends Component {
+  render() {
+    return (
+      &lt;BrowserRouter&gt;
+        &lt;div className=&quot;App&quot;&gt;
+          &lt;Navbar /&gt;
+          &lt;Switch&gt;
+            &lt;Route exact path='/' component={Dashboard} /&gt;
+            &lt;Route path='/project/:id' component={ProjectDetails} /&gt;
+            &lt;Route path='/signin' component={SignIn} /&gt;
+            &lt;Route path='/signup' component={SignUp} /&gt;
+            &lt;Route path='/create' component={CreateProject} /&gt;
+          &lt;/Switch&gt;
+        &lt;/div&gt;
+      &lt;/BrowserRouter&gt;
+    );
+  }
+}
+
+export default App;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br></div></div><img width="1677" alt="スクリーンショット 2019-10-22 18.04.21.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/55d727db-d6ad-3c57-a9b0-b58aa517adcd.png"> <p>作成したNavbarのリンクたちが正しく遷移するようにSignedInlinksと SignedOutLinksを修正しよう．</p> <div class="language-SignedInLinks.js line-numbers-mode"><pre class="language-text"><code>&lt;li&gt;&lt;NavLink to='/create'&gt;New Project&lt;/NavLink&gt;&lt;/li&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><div class="language-SignedOutLinks.js line-numbers-mode"><pre class="language-text"><code>&lt;li&gt;&lt;NavLink to='/signup'&gt;Signup&lt;/NavLink&gt;&lt;/li&gt;
+&lt;li&gt;&lt;NavLink to='/signin'&gt;Log In&lt;/NavLink&gt;&lt;/li&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>ここで少しオリジナルにCSSをいじっていく．</p> <p>背景に使う画像を<a href="https://github.com/iamshaunjp/React-Redux-Firebase-App/tree/lesson-10/marioplan/public/img" target="_blank" rel="noopener noreferrer">ここ<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a>からダウンロードして<code>public</code>に<code>img</code>フォルダを作ってそこに配置．</p> <p>そしてsrc/index.cssでcssをいじる．</p> <div class="language-src/index.css line-numbers-mode"><pre class="language-text"><code>// 画像の底が画面の底にくるための設定
+html {
+  min-height: 100%;
+}
+// 背景設定
+body {
+  margin: 0;
+  padding: 0rem;
+  font-family: sans-serif;
+  background: url(/img/mario-bg.png) no-repeat;
+  background-size: 100%;
+  background-position: bottom;
+  background-color: #95e8f3;
+  min-height: 100%;
+}
+
+form {
+  padding: 20px;
+  margin-top: 60px;
+}
+
+form button, form h5 {
+  margin: 20px 0;
+}
+// フォームが選択状態の時にボタンと同じ色になる設定
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-color: #ec407a;
+  box-shadow: none;
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><img width="1677" alt="スクリーンショット 2019-10-22 21.10.32.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/f3d99014-fbae-4ba9-ab71-27c6e373e365.png"> <p>これでだいぶ見栄えは完成しました．次からいよいよReduxの状態管理を使ってfirebaseとの連携に備える．</p></div> <footer class="page-edit" style="display:none;"><!----> <div class="last-updated"><span class="prefix">Last Updated: </span> <span class="time">4/5/2020, 6:54:54 PM</span></div></footer> <!----></main> <!----> <div style="display:none;" data-v-319dd33c data-v-319dd33c><div class="comments-wrapper" data-v-319dd33c><!----></div></div></div></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-a81d141e data-v-a81d141e><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-a81d141e><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-a81d141e></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-a81d141e></path></svg></div></div></div>
+    <script src="/assets/js/app.944e48b4.js" defer></script><script src="/assets/js/3.d0efcf80.js" defer></script><script src="/assets/js/1.72bd620a.js" defer></script><script src="/assets/js/14.b7b71e4f.js" defer></script>
+  </body>
+</html>
