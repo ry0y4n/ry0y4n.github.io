@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "vuepress": "1.3.1",
-    "vuepress-theme-reco": "git+https://github.com/ry0y4n/vuepress-theme-reco.git#develop"
+    "vuepress-theme-reco": "1.3.2"
   },
   "description": "モモスケが日々考えていることを落としておくためのサイト"
 }
