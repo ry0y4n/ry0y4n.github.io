@@ -1,11 +1,5 @@
 # vuepress-theme-reco-demo
 
-Blog demo for vuepress-theme-reco
+`vuepress-theme-reco`というVuePressテーマを使って作成したmarkdownブログ
 
-```bash
-# 编译
-npm run build
-
-# 启动
-npm run dev
-```
+テーマが中国製なので一部中国語が混じってるが，そのうち直す．．．そのうち．
