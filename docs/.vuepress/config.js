@@ -1,6 +1,6 @@
 module.exports = {
   "title": "Momo Blog",
-  "description": "モモスケが日々考えていることを落としておくためのサイト",
+  "description": "日々考えていることを落としておくためのサイト",
   "dest": "public",
   "head": [
     [
@@ -16,7 +16,8 @@ module.exports = {
         "name": "viewport",
         "content": "width=device-width,initial-scale=1,user-scalable=no"
       }
-    ]
+    ],
+    ["script", { src: "temp.js" }]
   ],
   "theme": "reco",
   "themeConfig": {
@@ -67,8 +68,7 @@ module.exports = {
     "lastUpdated": "Last Updated",
     "author": "momosuke",
     "authorAvatar": "/sushi.JPG",
-    "record": "xxxx",
-    "startYear": "2017"
+    "startYear": "2019"
   },
   "markdown": {
     "lineNumbers": true

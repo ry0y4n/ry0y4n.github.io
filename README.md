@@ -1,11 +1,4 @@
 # vuepress-theme-reco-demo
+VuePressテーマを使って開発したNuxt×markdownブログ
 
-Blog demo for vuepress-theme-reco
-
-```bash
-# 编译
-npm run build
-
-# 启动
-npm run dev
-```
+テーマが中国製なので一部中国語が混じってるが，そのうち直す．．．そのうち．
