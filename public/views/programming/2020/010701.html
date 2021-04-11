@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発② | Momo Blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="日々考えていることを落としておくためのサイト">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.cf1d2abd.css" as="style"><link rel="preload" href="/assets/js/app.7d2482f9.js" as="script"><link rel="preload" href="/assets/js/3.272f7630.js" as="script"><link rel="preload" href="/assets/js/1.55db5d3f.js" as="script"><link rel="preload" href="/assets/js/23.b64b8a81.js" as="script"><link rel="prefetch" href="/assets/js/10.62a23e1b.js"><link rel="prefetch" href="/assets/js/11.8bbc56c3.js"><link rel="prefetch" href="/assets/js/12.a3f699b3.js"><link rel="prefetch" href="/assets/js/13.9f57289e.js"><link rel="prefetch" href="/assets/js/14.39c46167.js"><link rel="prefetch" href="/assets/js/15.4c3eadd5.js"><link rel="prefetch" href="/assets/js/16.7a7a77f4.js"><link rel="prefetch" href="/assets/js/17.67bb83e7.js"><link rel="prefetch" href="/assets/js/18.f06e3ceb.js"><link rel="prefetch" href="/assets/js/19.9235cf5d.js"><link rel="prefetch" href="/assets/js/20.5da8e922.js"><link rel="prefetch" href="/assets/js/21.d6023f68.js"><link rel="prefetch" href="/assets/js/22.a3d55a19.js"><link rel="prefetch" href="/assets/js/24.687f3725.js"><link rel="prefetch" href="/assets/js/25.cc3ffec5.js"><link rel="prefetch" href="/assets/js/26.9e1ae80c.js"><link rel="prefetch" href="/assets/js/27.71c9e82c.js"><link rel="prefetch" href="/assets/js/28.b639aa88.js"><link rel="prefetch" href="/assets/js/29.ed7077e6.js"><link rel="prefetch" href="/assets/js/30.cf01843b.js"><link rel="prefetch" href="/assets/js/4.972bb22a.js"><link rel="prefetch" href="/assets/js/5.afa7f296.js"><link rel="prefetch" href="/assets/js/6.9f6a9541.js"><link rel="prefetch" href="/assets/js/7.0132aea6.js"><link rel="prefetch" href="/assets/js/8.172aee83.js"><link rel="prefetch" href="/assets/js/9.5429c9cc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.cf1d2abd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-1156296a><div data-v-1156296a><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-1156296a data-v-1156296a><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-4e82dffc data-v-1156296a data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>Momo Blog</h3> <p class="description" data-v-4e82dffc data-v-4e82dffc>日々考えていることを落としておくためのサイト</p> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>momosuke</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div class="hide" data-v-1156296a><header class="navbar" data-v-1156296a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Momo Blog" class="logo"> <span class="site-name">Momo Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/ブロックチェーン/" class="nav-link"><i class="undefined"></i>
+  ブロックチェーン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-1156296a></div> <aside class="sidebar" data-v-1156296a><div class="personal-info-wrapper" data-v-828910c6 data-v-1156296a><img src="/sushi.JPG" alt="author-avatar" class="personal-img" data-v-828910c6> <h3 class="name" data-v-828910c6>
+    momosuke
+  </h3> <div class="num" data-v-828910c6><div data-v-828910c6><h3 data-v-828910c6>20</h3> <h6 data-v-828910c6>文章</h6></div> <div data-v-828910c6><h3 data-v-828910c6>29</h3> <h6 data-v-828910c6>ラベル</h6></div></div> <ul class="social-links" data-v-828910c6></ul> <hr data-v-828910c6></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/ブロックチェーン/" class="nav-link"><i class="undefined"></i>
+  ブロックチェーン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-4e82dffc data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発②</h3> <!----> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>momosuke</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div data-v-1156296a><main class="page"><section><div class="page-title"><h1 class="title">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発②</h1> <div data-v-1ff7123e><i class="iconfont reco-account" data-v-1ff7123e><span data-v-1ff7123e>momosuke</span></i> <i class="iconfont reco-date" data-v-1ff7123e><span data-v-1ff7123e>2020-1-7</span></i> <!----> <i class="tags iconfont reco-tag" data-v-1ff7123e><span class="tag-item" data-v-1ff7123e>React</span><span class="tag-item" data-v-1ff7123e>Redux</span><span class="tag-item" data-v-1ff7123e>Firebase</span></i></div></div> <div class="theme-reco-content content__default"><p>前回ではReactでアプリの見た目と簡単なページ遷移を設定した．</p> <p>今回は一気にRedux, Thunk, Firebaseを使っていく．</p> <p><a href="/views/programming/2020/010601.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</a></p> <p><a href="">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発②</a>　←今ここ！！！</p> <p><a href="/views/programming/2020/010801.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発③</a></p> <p><a href="/views/programming/2020/010901.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④</a></p> <h2 id="reduxを使ってreducer実装"><a href="#reduxを使ってreducer実装" class="header-anchor">#</a> Reduxを使ってReducer実装</h2> <p>まずは<code>redux</code>とReactとReduxの接着剤的な役割の<code>react-redux</code>をインストールする．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>cd marioplan
+npm install redux react-redux@5.1.1
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br></div></div><p>インストールが完了したら．<code>src/index.js</code>に移動してstoreを作成する．Reduxの基礎がわかってる人なら大丈夫だと思うがstoreはアプリ全体の状態を管理するためのものだ．React単体ではコンポネント単位でしか状態を保管できなかった．</p> <div class="language-src/index.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux'
+
+const store = createStore();
+
+ReactDOM.render(&lt;App /&gt;, document.getElementById('root'));
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p><code>createStore</code>の引数には<code>reducer</code>を与えないといけない．reducerがどんなものか忘れてしまった人は
+<a href="https://qiita.com/mpyw/items/a816c6380219b1d5a3bf" target="_blank" rel="noopener noreferrer">たぶんこれが一番分かりやすいと思います React + Redux のフロー図解<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>　で確認してみて欲しい．</p> <p>reducerは一般的にたくさんの種類の<code>action</code>を扱うので1つにまとめると煩雑になってしまいがちだ．なので複数に分けて作成しルートリデューサーに統合して<code>store</code>に飲み込ませる．</p> <p>それではreducerを1つ1つ作っていく．<code>src</code>フォルダ内に<code>store</code>を作成し，さらにその中に<code>reducers</code>を作成．
+そこに<code>authReducer.js</code>を設置し書き込んでいく．</p> <div class="language-src/store/reducers/authReducer.js line-numbers-mode"><pre class="language-text"><code>const initState = {}
+const authReducer = (state = initState, action) =&gt; {
+    return state
+}
+
+export default authReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>reducerはアプリがスタートした時に初めて実行されるが，最初はstateがアクティブでないので初期値をデフォルト値として与える必要がある．関数内はというと今はまだstateをreturnするだけにしておく．</p> <p>他のreducerも作っていく．</p> <div class="language-reducers/projectReducer.js line-numbers-mode"><pre class="language-text"><code>const initState = ()
+const projectReducer = (state = initState, action) =&gt; {
+    return state
+}
+
+export default projectReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>これらをまとめるルートリデューサーを作っていく．</p> <div class="language-reducers/rootReducer.js line-numbers-mode"><pre class="language-text"><code>import authReducer from './authReducer'
+import projectReducer from './projectReducer'
+import { combineReducers } from 'redux'
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    project: projectReducer
+})
+
+export default rootReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br></div></div><p><code>combineReducer</code>にはオブジェクトを渡すが，この時プロパティがそのまま<code>state</code>のプロパティに追加され，それらはreducerと対応する．
+つまり<code>authReducer</code>は<code>state</code>の<code>auth</code>プロパティを更新，<code>projectReducer</code>は<code>project</code>プロパティを更新する役割を持っている．</p> <p>ルートリデューサーができたので<code>index.js</code>に戻って<code>createStore</code>に読み込ませる．
+そしてアプリがstoreにアクセスできるように<code>Provider</code>にstoreを渡す形で<code>App</code>を囲う．<code>Provider</code>は<code>react-redux</code>から提供されていて先ほど説明した通りまさにReactとRedux(store)を繋ぐ接着剤の役割を担っている．</p> <div class="language-src/index.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { createStore } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+import { Provider } from 'react-redux'
+
+const store = createStore(rootReducer);
+
+ReactDOM.render(
+    &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+    &lt;/Provider&gt;
+    , document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br></div></div><h2 id="ダミーデータを置いてreduxの振舞いの確認"><a href="#ダミーデータを置いてreduxの振舞いの確認" class="header-anchor">#</a> ダミーデータを置いてreduxの振舞いの確認</h2> <p>ここでは<code>projectReducer</code>にでもダミーデータを置いて<code>ProjectList</code>ひいては<code>ProjectSummary</code>に<code>props</code>としてダミーデータを渡してうまく表示させてみたいと思う．</p> <div class="language-reuders/projectReducer.js line-numbers-mode"><pre class="language-text"><code>const initState = {
+    projects: [
+        {id: '1', title: 'help me find peach', content: 'blah blah blah'},
+        {id: '2', title: 'collect all the stars', content: 'blah blah blah'},
+        {id: '3', title: 'egg hunt with yoshi', content: 'blah blah blah'},
+    ]
+}
+const projectReducer = (state = initState, action) =&gt; {
+    return state
+}
+
+export default projectReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p><code>initState</code>に<code>projects</code>がプロパティのオブジェクト配列を設定．これで<code>projectReducer</code>はこのダミーデータな<code>state</code>をreturnする．このreturnされたオブジェクトは<code>rootReducer</code>で定義した通り，<code>state</code>中の<code>project</code>プロパティにて管理される．</p> <p>それでは<code>Dashboard</code>でダミーデータにアクセスして下位のコンポネントに渡して行こう．</p> <div class="language-dashboard/Dashboard.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import Notification from './Notification'
+import ProjectList from '../projects/ProjectList'
+import { connect } from 'react-redux'
+
+class Dashboard extends Component {
+    render() {
+        const { projects } = this.props
+
+        return (
+            &lt;div className=&quot;dashboard container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col s12 m6&quot;&gt;
+                        &lt;ProjectList projects={projects} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;col s12 m5 offset-m1&quot;&gt;
+                        &lt;Notification /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+const mapStateToProps = (state) =&gt; {
+    return {
+        projects: state.project.projects
+    }
+}
+
+export default connect(mapStateToProps)(Dashboard);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br></div></div><p>各コンポネントを<code>store</code>とつなげるには<code>connect</code>を使う．<code>connect</code>は関数であり<code>react-redux</code>から提供されている．<code>Provider</code>といい本当に優秀な接着剤である．</p> <p><code>connect</code>には<code>mapStateToProps</code>と<code>mapDispatchToProps</code>という2つの関数を渡せる．今は前者だけを渡す．</p> <ul><li><code>mapStateToProps</code>・・・コンポネントで使いたい<code>store</code>の<code>state</code>を宣言することで<code>props</code>としてコンポネント内で使えるようにする関数</li> <li><code>mapDispatchToProps</code>・・・<code>action creator</code>を使う場合に予め<code>dispatch</code>に噛ませた状態を<code>props</code>としてコンポネント内で使えるようにする関数</li></ul> <div class="language- line-numbers-mode"><pre class="language-text"><code>const { projects } = this.props
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>で吸収して</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>&lt;ProjectList projects={projects} /&gt;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>でうまく<code>ProjectList</code>に<code>props</code>としてダミーデータを渡している．</p> <div class="language-projects/ProjectList.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import ProjectSummary from './ProjectSummary'
+
+const ProjectList = ({projects}) =&gt; {
+    return (
+        &lt;div className=&quot;project-list section&quot;&gt;
+            { projects &amp;&amp; projects.map(project =&gt; {
+                return (
+                    &lt;ProjectSummary project={project} key={project.id} /&gt;
+                )
+            })}
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectList;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>同様に<code>props</code>として<code>projects</code>を受け取る．
+プロジェクトが増えてくることを考えると，<code>ProjectSummary</code>をひたすら羅列するのは非常に面倒なのでこれを機に<code>map</code>を使って<code>ProjectSummary</code>を呼び出す．</p> <div class="language-projects/ProjectSummary.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const ProjectSummary = ({project}) =&gt; {
+    return (
+        &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+            &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                &lt;span className=&quot;card-title&quot;&gt;{project.title}&lt;/span&gt;
+                &lt;p&gt;Posted by the Net Ninja&lt;/p&gt;
+                &lt;p className=&quot;grey-text&quot;&gt;3rd September&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectSummary;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>タイトルに使用してみる．この状態で<code>npm start</code>してみる．
+<img width="1677" alt="スクリーンショット 2019-10-24 21.28.59.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/1d19ed94-5bd8-429e-0c32-f240fbd8dec3.png">
+タイトルがダミーデータと一致していれば成功だ．</p> <h2 id="reduxで非同期処理を扱う"><a href="#reduxで非同期処理を扱う" class="header-anchor">#</a> Reduxで非同期処理を扱う</h2> <p>ダミーデータではなく本物のデータベースからデータを取ってくる時にどこにコードを書けばいいだろうか？</p> <p><code>reducer</code>内か？いや，それだとうまくワークしない．データベースへのアクセスには幾分か時間がかかる．その間に<code>return state</code>してしまうからだ．
+では，コンポネント自身か？レンダリングのタイミングでデータベースから取ってきて<code>action</code>として<code>reducer</code>に取り込んで<code>state</code>を更新できる．しかしこれもまたアクセス時間やらが邪魔して細かな懸念が拭い切れない．
+やはりコンポネントの外でデータ，state操作はやりたい．</p> <p>ここでRedcuxライフサイクルの概念図をみてみよう．
+<img width="1368" alt="スクリーンショット 2019-10-24 22.08.19.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/aac932b6-c7b5-39f2-48bf-b2c377c668d2.png"></p> <p>中核となる<code>store</code>があって，<code>state</code>からマッピングして<code>component</code>で<code>props</code>を<code>DOM</code>として組み込める．
+もし<code>state</code>を変更したいなら，<code>component</code>から<code>action</code>を<code>dispatch</code>する．<code>action</code>には<code>reducer</code>が判断するための<code>type</code>と具体的に何がしたいかの<code>payload</code>を含める．んで<code>action</code>は<code>reducer</code>に渡され，そこで<code>state</code>が更新され，変更点がレンダリングされコンポネントのビューに反映される．</p> <p>これが基本のライフサイクルである．そして僕らが考えている「どうやって外部からデータを取ってくるか」だが，
+まぁもうわかってると思うが，<code>DISPATCH ACTION</code>と<code>REDUCER</code>の間である．
+<code>action</code>が<code>dispatch</code>されたら（正確にはまだdispatchされない），一旦止めて非同期処理を実行する．その後，止めていたdispatchを再開し，reducerを実行するという流れだ．</p> <p>これを可能にするために<code>redux-thunk</code>と呼ばれる<code>middleware</code>を使用する．
+<code>middleware</code>がさっきの2点間でコードを実行する．このおかげで<code>action creator</code>の中で非同期処理が行える．
+<img width="1368" alt="スクリーンショット 2019-10-24 22.29.53.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/1d7b66a0-a18e-3753-a66a-0de2422dc7cf.png">
+「<code>action</code>を<code>dispatch</code>する」から「<code>action</code>を孕んだ<code>action creator</code>を<code>dispatch</code>する」というイメージだ．
+<code>redux thunk</code>は<code>action</code>ではなく<code>関数</code>を返す．
+<code>関数</code>の中では，<code>dispatch</code>を一旦中止し，非同期処理を行い<code>dispatch</code>を再開する．</p> <p>超要約すると，<code>dispatch</code>に<code>action</code>の代わりに<code>action creator</code>渡すと，中で非同期処理とかしてそのレスポンスも含めた<code>action</code>を<code>reducer</code>に渡してくれるよ．ということ．</p> <p>解説を省いたけど<code>action creator</code>があまり分からないという人は
+<a href="https://qiita.com/TsutomuNakamura/items/2ded5112ca5ded70e573#redux-thunk-%E3%82%92%E4%BD%BF%E3%81%86" target="_blank" rel="noopener noreferrer">今から始めるReact入門 〜 Redux 編: Redux 単体で状態管理をしっかり理解する<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>　を参照して欲しい．</p> <h2 id="thunkのセットアップ"><a href="#thunkのセットアップ" class="header-anchor">#</a> Thunkのセットアップ</h2> <p>まず<code>Thunk</code>のインストール</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>npm install redux-thunk
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><code>src/index.js</code>で<code>redux-thunk</code>なる<code>middleware</code>を<code>store</code>に読み込む．</p> <div class="language-src/index.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+ReactDOM.render(
+    &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+    &lt;/Provider&gt;
+    , document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br></div></div><p><code>redux</code>からストアエンハンサー<code>applyMiddleware</code>という名前の通り<code>middleware</code>を<code>store</code>に適用するための関数もインポートしている．引数には複数の<code>middleware</code>を指定することが可能である．ストアエンハンサーはいくつか存在するがどれも<code>store</code>に機能性を提供する．今回の場合は<code>action creator</code>内で関数を返すことができるようになるという機能性が提供されているわけだ．</p> <p>それではシンプルな<code>action creator</code>を作っていく．<code>store</code>に<code>actions</code>フォルダを作成．
+そこに<code>projectActions.js</code>を設置．これプロジェクトに関する<code>action creator</code>を持つファイルである．</p> <div class="language-store/actions/projectActions.js line-numbers-mode"><pre class="language-text"><code>export const createProject = (project) =&gt; {
+    return (dispatch, getState) =&gt; {
+        // make async call to database
+        dispatch({ type: 'CREATE_PROJECT', project})
+    }
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p><code>action creator</code>が返す関数の引数には<code>action</code>を<code>reducer</code>に送る関数<code>dispatch</code>と<code>state</code>を読み込むための<code>getState</code>が渡されている．</p> <p>次にやることは<code>CreateProject</code>コンポネント内でこの<code>action creator</code>を<code>dispatch</code>することだ．</p> <div class="language-projects/CreateProject.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { createProject } from '../../store/actions/projectActions'
+
+class CreateProject extends Component {
+    state = {
+        title: '',
+        content: ''
+    }
+    handleChange = (e) =&gt; {
+        this.setState({
+            [e.target.id]: e.target.value
+        })
+    }
+    handleSubmit = (e) =&gt; {
+        e.preventDefault()
+        this.props.createProject(this.state)
+    }
+    render() {
+        return (
+            &lt;div className=&quot;container&quot;&gt;
+                &lt;form onSubmit={this.handleSubmit} className=&quot;white&quot;&gt;
+                    &lt;h5 className=&quot;grey-text text-darken-3&quot;&gt;Create new project&lt;/h5&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;title&quot;&gt;Title&lt;/label&gt;
+                        &lt;input type=&quot;text&quot; id=&quot;title&quot; onChange={this.handleChange} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;label htmlFor=&quot;content&quot;&gt;Project Content&lt;/label&gt;
+                        &lt;textarea id=&quot;content&quot; className=&quot;materialize-textarea&quot; onChange={this.handleChange}&gt;&lt;/textarea&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;input-field&quot;&gt;
+                        &lt;button className=&quot;btn pink lighten-1 z-depth-0&quot;&gt;Create&lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/form&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+const mapDispatchToProps = (dispatch) =&gt; {
+    return {
+        createProject: (project) =&gt; dispatch(createProject(project))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(CreateProject)
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><p><code>mapDispatchToProps</code>で<code>action creator</code>を孕んだ<code>dispatch</code>を<code>createProject</code>として<code>props</code>に渡し，<code>handleSubmit</code>内で使った．</p> <p>次に<code>action</code>を受け取る<code>projectReducer</code>を書いていく．</p> <div class="language-reducers/projectReducer.js line-numbers-mode"><pre class="language-text"><code>const initState = {
+    projects: [
+        {id: '1', title: 'help me find peach', content: 'blah blah blah'},
+        {id: '2', title: 'collect all the stars', content: 'blah blah blah'},
+        {id: '3', title: 'egg hunt with yoshi', content: 'blah blah blah'},
+    ]
+}
+const projectReducer = (state = initState, action) =&gt; {
+    switch (action.type) {
+        case 'CREATE_PROJECT':
+            console.log('created project', action.project)
+    }
+    return state
+}
+
+export default projectReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><p>今はとりあえず新しいプロジェクトを作ったら，コンソールに内容が表示するようにした．
+<img width="1679" alt="スクリーンショット 2019-10-24 23.34.45.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/d831befa-85db-694a-f696-67201fffacb2.png">
+本当はCREATE押したらFire storeにデータをaddして欲しい．</p> <p>ということでいよいよ<code>Firebase</code>を扱っていこうと思う．</p> <h2 id="firebaseセットアップ"><a href="#firebaseセットアップ" class="header-anchor">#</a> Firebaseセットアップ</h2> <p><a href="https://console.firebase.google.com/" target="_blank" rel="noopener noreferrer">firebase<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>に飛んで適当にログインしてコンソールへ移動．</p> <ul><li>1.<code>プロジェクトを追加</code>を押す</li> <li><ol start="2"><li>適当に<code>プロジェクト名</code>を記入</li></ol></li> <li><ol start="3"><li>Googleアナリティクスは今回は使わない.</li></ol></li> <li><ol start="4"><li>プロジェクト作成完了</li></ol></li></ul> <p>ここからfirebaseとアプリをつなげる作業．
+プロジェクトのダッシュボードにて<code>HTMLタグ</code>のようなマークをクリック．</p> <ul><li><ol><li>アプリの適当なニックネームを記入．Hosting機能はあとで別途設定するのでチェックを外す．</li></ol></li> <li><ol start="2"><li>Firebase SDKの追加でコードがババっと出てくるが以下の情報だけをコピー．上の方のはnpmで直接インストールするからいらない．</li></ol></li></ul> <blockquote><p>注意：　下コードは<code>apiKey</code>しかり諸々が筆者固有のユニークなものなので皆さんにはご自身のブラウザで提示されたコードをコピーして欲しい．</p></blockquote> <div class="language- line-numbers-mode"><pre class="language-text"><code>// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: &quot;AIzaSyCZItfqmvg5jjK0JXR9cnoW9xcHmPLWkfs&quot;,
+    authDomain: &quot;net-ninja-marioplan-178f9.firebaseapp.com&quot;,
+    databaseURL: &quot;https://net-ninja-marioplan-178f9.firebaseio.com&quot;,
+    projectId: &quot;net-ninja-marioplan-178f9&quot;,
+    storageBucket: &quot;net-ninja-marioplan-178f9.appspot.com&quot;,
+    messagingSenderId: &quot;240847046405&quot;,
+    appId: &quot;1:240847046405:web:45a4511e8e31622089196c&quot;,
+    measurementId: &quot;G-BJYQ8GHCBL&quot;
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br></div></div><p>firebaseライブラリをインストール</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>npm install firebase
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>firebaseセットアップのためのconfigファイルを作成する．<code>src</code>に<code>config</code>フォルダを作成．
+そこに<code>fbConfig.js</code>を作成し先ほどコピーした内容をそのまま貼り付けて，最初と最後に少し足す．
+firebaseの<code>firestore</code>と<code>auth</code>を使えるようにインポートする．最後から2行目は<code>firestore</code>の初期化.
+これはfirebaseライブラリの更新であり，firebaseのタイムスタンプの動作を変更する．これによりあとでコンソールがエラーを吐くのを避けている．</p> <p><code>apiKey</code>などは他人に見られても大丈夫なのでご安心を．最後の方でfirebase側でセキュリティのルールについても設定する．</p> <div class="language-src/config/fbConfig.js line-numbers-mode"><pre class="language-text"><code>import firebase from 'firebase/app'
+import 'firebase/firestore'
+import 'firebase/auth'
+
+// Your web app's Firebase configuration
+var firebaseConfig = {
+    apiKey: &quot;AIzaSyCZItfqmvg5jjK0JXR9cnoW9xcHmPLWkfs&quot;,
+    authDomain: &quot;net-ninja-marioplan-178f9.firebaseapp.com&quot;,
+    databaseURL: &quot;https://net-ninja-marioplan-178f9.firebaseio.com&quot;,
+    projectId: &quot;net-ninja-marioplan-178f9&quot;,
+    storageBucket: &quot;net-ninja-marioplan-178f9.appspot.com&quot;,
+    messagingSenderId: &quot;240847046405&quot;,
+    appId: &quot;1:240847046405:web:45a4511e8e31622089196c&quot;,
+    measurementId: &quot;G-BJYQ8GHCBL&quot;
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+
+firebase.firestore()
+
+export default firebase;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>最後にエクスポートすることでコンポネントでインポートすれば，<code>firebase</code>とやりとりができるようになる．</p> <h2 id="firestoreのデータとコレクション"><a href="#firestoreのデータとコレクション" class="header-anchor">#</a> Firestoreのデータとコレクション</h2> <p>firestoreは<code>NoSQL</code>と呼ばれるデータベース．firestoreではデータの集まりをコレクションという．
+今回のでいうとプロジェクト単体がデータとなりその集合を<code>projects</code>というコレクションで管理する．他にも<code>users</code>と<code>notifications</code>というコレクションを作成する．
+<img width="1359" alt="スクリーンショット 2019-10-25 16.11.10.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/5ebdba28-d8cb-be2f-496f-0a66d8afa05e.png">
+コレクション内のデータはJavaScriptオブジェクトのような形式をとる．</p> <p>まずは<code>projects</code>コレクションを作成していく．そこにダミーデータを設置し，アプリからアクセスできるようにして行こう．</p> <p>firebaseプロジェクトの<code>Database</code>画面にいき，<code>データベースの作成</code>を押す．</p> <p>ロックモードかテストモードかを選ばされると思いますが，データへのアクセスやデータの更新を簡単にするためにテストモードを選びます．セキュリティのルールを最後の方で書き換えるので大丈夫．</p> <p>ロケーション（多分サーバーの場所）は<code>asia-northeast1</code>が東京なのでそれを選んで完了をクリック．</p> <p>コレクションIDが<code>projects</code>なコレクションを作る．</p> <p>その際の以下のダミープロジェクトを1つ作る．
+<img width="687" alt="スクリーンショット 2019-10-25 16.29.27.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/b4604ce8-b8cc-4b6c-17b5-bb6ae731d015.png">
+このプロジェクトにはユニークなIDが振り分けられる．
+<code>timeStamp</code>プロパティも付けたいのだがそれはあとで実装する．Fieldはあとでも追加できるので．</p> <h2 id="reduxとfirebaseを繋ぐ"><a href="#reduxとfirebaseを繋ぐ" class="header-anchor">#</a> ReduxとFirebaseを繋ぐ</h2> <p>まずは<code>CreateProject</code>コンポネントにおいてフォームを入力したら入力内容（プロジェクト）がFirestorに追加されることを目指す．
+そのためには<code>projectAction.js</code>アクションクリエータでfirebaseとの非同期処理を書く必要がある．</p> <p>ここでの実装方法として単純にfirebaseライブラリをインストールしてもいいのだが，reduxとfirebaseの共生のためにデザインされたいくつかのパッケージを代わりにインストールしたいと思う．こいつらの名前を<code>react-redux-firebase</code>，<code>redux-firestore</code>という．豪華な名前だ．</p> <p><code>react-redux-firebase</code>はfirebaseサービス全体をバインディングする．
+<code>redux-firestore</code>はreduxとfirestore databaseとをバインディングする．</p> <p>この2つのパッケージをインストールすることで，firebaseの<code>API</code>を使用してデータベースと通信できる．<code>action creator</code>の中でね．
+つまり，<code>firestore</code>データベースと<code>store</code>を同期することができる．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>// ここ最近でreact-redux-firebaseが大きなアップデートをしたようで最新のversionだとエラーを吐くので安全なバージョンを選択．
+npm install react-redux-firebase@2.4.1
+npm install redux-firestore@0.9.0
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br></div></div><p>インストールが完了したら，<code>action creator</code>でfirebaseまた，firestoreAPIにアクセスできるように<code>src/index.js</code>にて読み込む．</p> <div class="language-src/index.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { getFirestore } from 'redux-firestore'
+import { getFirebase } from 'react-redux-firebase'
+
+const store = createStore(rootReducer, applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })));
+
+ReactDOM.render(
+    &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+    &lt;/Provider&gt;
+    , document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br></div></div><p><code>withExtraArgument</code>の引数にインポートしたものを渡すことで，渡したものが<code>redux-thunk</code>から呼び出せる．つまり<code>action creator</code>で渡したものを使える．つまり，<code>action creator</code>内でfirebaseとの非同期処理が行える．</p> <p>早速<code>projectActions</code>をいじる．</p> <div class="language-actions/projectActions.js line-numbers-mode"><pre class="language-text"><code>export const createProject = (project) =&gt; {
+    return (dispatch, getState, { getFirebase, getFirestore }) =&gt; {
+        // make async call to database
+        dispatch({ type: 'CREATE_PROJECT', project})
+    }
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br></div></div><p>だがこのままでは2つの<code>get~~</code>は機能しない．なぜなら，こいつらは僕らのfirebaseプロジェクトを知らない．
+なので先ほど作ったfirebaseプロジェクトの情報を持った<code>fbConfig</code>ファイルを2つのパッケージに教えてやらないといけない．</p> <p>そのためには<code>ストアエンハンサー</code>が必要だ．
+ストアエンハンサーについては前に少し書いたが，<code>index.js</code>でいうと，<code>thunk</code>がミドルウェアで<code>applyMiddleware</code>がストアエンハンサーである．</p> <p>つまり<code>store</code>に複数のストアエンハンサーを設定することになるのだが，そのためにはreduxから<code>compose</code>なるものを使ってまとめる必要がある．
+複数の<code>reducer</code>を<code>combineReducers</code>を使ってまとめたように．</p> <div class="language-src/index.js line-numbers-mode"><pre class="language-text"><code>import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { createStore, applyMiddleware, compose } from 'redux'
+import rootReducer from './store/reducers/rootReducer'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import { reduxFirestore, getFirestore } from 'redux-firestore'
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase'
+import fbConfig from './config/fbConfig'
+
+const store = createStore(rootReducer,
+    compose(
+        applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+        reduxFirestore(fbConfig),
+        reactReduxFirebase(fbConfig)
+    )
+);
+
+ReactDOM.render(
+    &lt;Provider store={store}&gt;
+        &lt;App /&gt;
+    &lt;/Provider&gt;
+    , document.getElementById('root')
+);
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://bit.ly/CRA-PWA
+serviceWorker.unregister();
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br></div></div><p>firebase用の2つのパッケージから<code>reduxFirestore</code>, <code>reactReduxFirebase</code>というストアエンハンサーをインポートしている．
+そして<code>fbConfig</code>を渡すことで<code>projectActions</code>に渡された<code>getFirebase</code>と<code>getFirestore</code>が僕らのfirebasプロジェクトを認識してくれる．</p> <p>#Firestoreにデータを追加してみる
+firebasとreduxの接続設定が完了したので，実際に非同期処理を実装してみよう．</p> <div class="language-actions/projectActions.js line-numbers-mode"><pre class="language-text"><code>export const createProject = (project) =&gt; {
+    return (dispatch, getState, { getFirebase, getFirestore }) =&gt; {
+        // make async call to database
+        const firestore = getFirestore();
+        firestore.collection('projects').add({
+            ...project,
+            authorFirstName: 'Net',
+            authorLastName: 'Ninja',
+            authorId: 12345,
+            createdAt: new Date()
+        }).then(() =&gt; {
+            dispatch({ type: 'CREATE_PROJECT', project})
+        }).catch((err) =&gt; {
+            dispatch({ type: 'CREATE_PROJECT_ERROR', err })
+        })
+        
+    }
+};
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br></div></div><p>まず<code>getFirestore</code>の初期化することでfirestoreインスタンスが手に入る．
+<code>firestore.collection('projects').add</code>のところはもう言わずもがな，<code>projects</code>コレクションに<code>add</code>の引数のオブジェクトを追加する命令．</p> <p>この命令は非同期で少なからず時間がかかる．そして終わるまではdispatchするのを待って欲しいので，<code>then</code>を使う．またエラーが起きた用の<code>catch</code>でエラー用のアクションをdispatchするようにもした．</p> <p>次にreducerをいじる．</p> <div class="language-reducers/projectReducer.js line-numbers-mode"><pre class="language-text"><code>const initState = {
+    projects: [
+        {id: '1', title: 'help me find peach', content: 'blah blah blah'},
+        {id: '2', title: 'collect all the stars', content: 'blah blah blah'},
+        {id: '3', title: 'egg hunt with yoshi', content: 'blah blah blah'},
+    ]
+}
+const projectReducer = (state = initState, action) =&gt; {
+    switch (action.type) {
+        case 'CREATE_PROJECT':
+            console.log('created project', action.project);
+            return state;
+        case 'CREATE_PROJECT_ERROR':
+            console.log('create project error', action.err);
+            return state;        
+        default: 
+            return state;
+    }
+}
+
+export default projectReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>とりあえずコンソール出力して<code>return state</code>するだけ．</p> <p>firestoreとつながったか試しにプロジェクトを作ってみよう．
+<img width="1679" alt="スクリーンショット 2019-10-25 21.00.34.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/0112ccbe-9396-d807-e460-5a564bfeb70a.png"></p> <p>コンソールされたのを確認してfirestoreへいくと．
+<img width="1679" alt="スクリーンショット 2019-10-25 21.01.43.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/6cadc5b5-e717-04e7-d155-fb862d3771dd.png">
+無事firestoreにデータを追加することに成功した．</p> <p>しかしアプリのダッシュボードには依然としてダミーデータしか載ってない．次はダミーデータでなくfirestoreの<code>projects</code>コレクションのデータを取得して表示するようにしたい．</p> <h2 id="firestoreデータとの同期"><a href="#firestoreデータとの同期" class="header-anchor">#</a> Firestoreデータとの同期</h2> <p>そのためにはreduxのstateとfirestoreデータを同期する必要がある．そのための必要なパッケージは先ほどインストールした<code>redux-firestore</code>である．
+どこで使うのかというと<code>rootReducer.js</code>である．
+<code>redux-firestore</code>から予め定義された<code>firestoreReducer</code>というリデューサーをインポートして<code>combineReducers</code>してやるのだ．</p> <p>こいつはもう僕らのfirebaseプロジェクトを知っているから，バックグランドでfirestoreデータベースとreduxのstateとを同期してくれる．
+僕らがしないといけないのは<code>combineReducers</code>で固有のプロパティを与えてやることくらいだ．</p> <div class="language-reducers/rootReducer.js line-numbers-mode"><pre class="language-text"><code>import authReducer from './authReducer'
+import projectReducer from './projectReducer'
+import { combineReducers } from 'redux'
+import { firestoreReducer } from 'redux-firestore'
+
+const rootReducer = combineReducers({
+    auth: authReducer,
+    project: projectReducer,
+    firestore: firestoreReducer
+})
+
+export default rootReducer
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>これでstateの<code>firestore</code>プロパティにfirestoreデータベースが自動的に同期されるようになった．</p> <p>同期するデータはその瞬間にどのコンポネントがアクティブなのかということに依存する．つまりどんなデータをコンポネントが欲するかに依存する．
+そして所望されたデータが<code>firestoreReducer</code>によって同期されるというわけだ．</p> <p>なので今後僕らが同期のためにやるのはコンポネントから<code>firestoreReducer</code>に対してどんなデータが欲しいかを伝えることだけだ．</p> <p><code>Dashboard</code>でダミーデータの代わりにfirestoreのデータを表示するようにいじって行こう．</p> <div class="language-layout/Dashboard.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import Notification from './Notification'
+import ProjectList from '../projects/ProjectList'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+
+class Dashboard extends Component {
+    render() {
+        const { projects } = this.props
+
+        return (
+            &lt;div className=&quot;dashboard container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col s12 m6&quot;&gt;
+                        &lt;ProjectList projects={projects} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;col s12 m5 offset-m1&quot;&gt;
+                        &lt;Notification /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+const mapStateToProps = (state) =&gt; {
+    console.log(state);
+    return {
+        projects: state.firestore.ordered.projects
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'projects' }
+    ])
+)(Dashboard);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br></div></div><p>コンポネントとfirestoreをつなげるためにreact-redux-firebaseから<code>firestoreConnect</code>をインポートする．</p> <p>これをハイオーダーコンポネント（以下HOC）として<code>Dashboard</code>と繋げたいのだが，<code>connect(mapStateToProps)</code>という別のHOCを使用している．2つのHOCを使用するためにはストアエンハンサーの統合に使った<code>compose</code>をここでも使う．</p> <p>ちなみに<code>firestoreConnect</code>はオブジェクト配列を受け取る．このオブジェクトではどのコレクションと同期したいかを宣言している．これで<code>rootReducer</code>で宣言した通りstateの<code>firestore</code>に所望したデータが保管される．</p> <p>コンポネントをロードしたとき，firestoreデータが更新された時に<code>firestoreReducer</code>を誘発し<code>projects</code>コレクションとstore stateを同期する．</p> <p>また<code>mapStateToProps</code>で<code>projects</code>に渡す値をダミーデータでなく<code>firestore</code>のデータに変更している．</p> <p>結果こうなる．
+<img width="1679" alt="スクリーンショット 2019-10-25 22.26.15.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/e2de0007-b4b3-722a-18cf-e13648437d42.png"></p> <h2 id="プロジェクトディティールへの連奏"><a href="#プロジェクトディティールへの連奏" class="header-anchor">#</a> プロジェクトディティールへの連奏</h2> <p>次はダッシュボードのプロジェクトをクリックしたらディティール画面へ遷移するようにしたい．
+プロジェクトをマッピングしているのは<code>ProjectList</code>コンポネントなのでそこで<code>ProjectSummary</code>コンポネントを<code>Link</code>タグで囲めばいい．</p> <div class="language-projects/ProjectList.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import ProjectSummary from './ProjectSummary'
+import { Link } from 'react-router-dom'
+
+const ProjectList = ({projects}) =&gt; {
+    return (
+        &lt;div className=&quot;project-list section&quot;&gt;
+            { projects &amp;&amp; projects.map(project =&gt; {
+                return (
+                    &lt;Link to={'/project/' + project.id} key={project.id}&gt;
+                        &lt;ProjectSummary project={project} /&gt;
+                    &lt;/Link&gt;
+                )
+            })}
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectList;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><img width="1679" alt="スクリーンショット 2019-10-25 22.49.14.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/4eb7f058-f669-240b-537c-a67ed9b78b3d.png"> <p>なんとか遷移は成功した．次に<code>ProjectDetails</code>コンポネントを整形していく．</p> <p>firestoreのデータを使うために<code>Dashboard</code>でしたようにHOCを<code>compose</code>する．
+<code>mapStateToProps</code>部分だが，<code>id</code>にurlのid部分を代入し，それと<code>projects</code>を元に今回表示したいプロジェクトを特定し<code>props</code>としてコンポネントに渡している．</p> <p>コンポネントではprojectがローディング中に<code>else</code>の方が実行され，ロード完了次第，ifがtrueの方が実行される．
+なので画面をリロードすると一瞬<code>else</code>の文が表示される．</p> <div class="language-projects/ProjectDetail.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+
+const ProjectDetails = (props) =&gt; {
+    const { project } = props;
+    if (project) {
+        return (
+            &lt;div className=&quot;container section project-details&quot;&gt;
+                &lt;div className=&quot;card z-depth-0&quot;&gt;
+                    &lt;div className=&quot;card-content&quot;&gt;
+                        &lt;span className=&quot;card-title&quot;&gt;{ project.title }&lt;/span&gt;
+                        &lt;p&gt;{ project.content }&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;card-action gret lighten-4 grey-text&quot;&gt;
+                        &lt;div&gt;Posted by {project.authorFirstName} {project.authorLastName}&lt;/div&gt;
+                        &lt;div&gt;2nd, September, 2am&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    } else {
+        return (
+            &lt;div className=&quot;container center&quot;&gt;
+                &lt;p&gt;Loaging project...&lt;/p&gt;
+            &lt;/div&gt;
+        )
+    }
+    
+}
+
+const mapStateToProps = (state, ownProps) =&gt; {
+    const id = ownProps.match.params.id;
+    const projects = state.firestore.data.projects;
+    const project = projects ? projects[id] : null
+    return {
+        project: project
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'projects' }
+    ])
+)(ProjectDetails);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><img width="1679" alt="スクリーンショット 2019-10-25 23.02.24.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/1fdba1e2-34e9-5e65-bf9d-965a72f720f6.png"> <p>今回はここまで．</p> <p>次回からはFirebase Authを使ってログイン機能の実装をしていく．</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-70334359><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#reduxを使ってreducer実装" class="sidebar-link reco-side-reduxを使ってreducer実装" data-v-70334359>Reduxを使ってReducer実装</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#ダミーデータを置いてreduxの振舞いの確認" class="sidebar-link reco-side-ダミーデータを置いてreduxの振舞いの確認" data-v-70334359>ダミーデータを置いてreduxの振舞いの確認</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#reduxで非同期処理を扱う" class="sidebar-link reco-side-reduxで非同期処理を扱う" data-v-70334359>Reduxで非同期処理を扱う</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#thunkのセットアップ" class="sidebar-link reco-side-thunkのセットアップ" data-v-70334359>Thunkのセットアップ</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#firebaseセットアップ" class="sidebar-link reco-side-firebaseセットアップ" data-v-70334359>Firebaseセットアップ</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#firestoreのデータとコレクション" class="sidebar-link reco-side-firestoreのデータとコレクション" data-v-70334359>Firestoreのデータとコレクション</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#reduxとfirebaseを繋ぐ" class="sidebar-link reco-side-reduxとfirebaseを繋ぐ" data-v-70334359>ReduxとFirebaseを繋ぐ</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#firestoreデータとの同期" class="sidebar-link reco-side-firestoreデータとの同期" data-v-70334359>Firestoreデータとの同期</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010701.html#プロジェクトディティールへの連奏" class="sidebar-link reco-side-プロジェクトディティールへの連奏" data-v-70334359>プロジェクトディティールへの連奏</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.7d2482f9.js" defer></script><script src="/assets/js/3.272f7630.js" defer></script><script src="/assets/js/1.55db5d3f.js" defer></script><script src="/assets/js/23.b64b8a81.js" defer></script>
+  </body>
+</html>

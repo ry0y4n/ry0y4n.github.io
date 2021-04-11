@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ja-JP">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④ | Momo Blog</title>
+    <meta name="generator" content="VuePress 1.8.2">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="description" content="日々考えていることを落としておくためのサイト">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+    
+    <link rel="preload" href="/assets/css/0.styles.cf1d2abd.css" as="style"><link rel="preload" href="/assets/js/app.7d2482f9.js" as="script"><link rel="preload" href="/assets/js/3.272f7630.js" as="script"><link rel="preload" href="/assets/js/1.55db5d3f.js" as="script"><link rel="preload" href="/assets/js/25.cc3ffec5.js" as="script"><link rel="prefetch" href="/assets/js/10.62a23e1b.js"><link rel="prefetch" href="/assets/js/11.8bbc56c3.js"><link rel="prefetch" href="/assets/js/12.a3f699b3.js"><link rel="prefetch" href="/assets/js/13.9f57289e.js"><link rel="prefetch" href="/assets/js/14.39c46167.js"><link rel="prefetch" href="/assets/js/15.4c3eadd5.js"><link rel="prefetch" href="/assets/js/16.7a7a77f4.js"><link rel="prefetch" href="/assets/js/17.67bb83e7.js"><link rel="prefetch" href="/assets/js/18.f06e3ceb.js"><link rel="prefetch" href="/assets/js/19.9235cf5d.js"><link rel="prefetch" href="/assets/js/20.5da8e922.js"><link rel="prefetch" href="/assets/js/21.d6023f68.js"><link rel="prefetch" href="/assets/js/22.a3d55a19.js"><link rel="prefetch" href="/assets/js/23.b64b8a81.js"><link rel="prefetch" href="/assets/js/24.687f3725.js"><link rel="prefetch" href="/assets/js/26.9e1ae80c.js"><link rel="prefetch" href="/assets/js/27.71c9e82c.js"><link rel="prefetch" href="/assets/js/28.b639aa88.js"><link rel="prefetch" href="/assets/js/29.ed7077e6.js"><link rel="prefetch" href="/assets/js/30.cf01843b.js"><link rel="prefetch" href="/assets/js/4.972bb22a.js"><link rel="prefetch" href="/assets/js/5.afa7f296.js"><link rel="prefetch" href="/assets/js/6.9f6a9541.js"><link rel="prefetch" href="/assets/js/7.0132aea6.js"><link rel="prefetch" href="/assets/js/8.172aee83.js"><link rel="prefetch" href="/assets/js/9.5429c9cc.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.cf1d2abd.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container no-sidebar" data-v-1156296a><div data-v-1156296a><div id="loader-wrapper" class="loading-wrapper" data-v-d48f4d20 data-v-1156296a data-v-1156296a><div class="loader-main" data-v-d48f4d20><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div><div data-v-d48f4d20></div></div> <!----> <!----></div> <div class="password-shadow password-wrapper-out" style="display:none;" data-v-4e82dffc data-v-1156296a data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>Momo Blog</h3> <p class="description" data-v-4e82dffc data-v-4e82dffc>日々考えていることを落としておくためのサイト</p> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>momosuke</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div class="hide" data-v-1156296a><header class="navbar" data-v-1156296a><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/logo.png" alt="Momo Blog" class="logo"> <span class="site-name">Momo Blog</span></a> <div class="links"><div class="color-picker"><a class="color-button"><i class="iconfont reco-color"></i></a> <div class="color-picker-menu" style="display:none;"><div class="mode-options"><h4 class="title">Choose mode</h4> <ul class="color-mode-options"><li class="dark">dark</li><li class="auto active">auto</li><li class="light">light</li></ul></div></div></div> <div class="search-box"><i class="iconfont reco-search"></i> <input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/ブロックチェーン/" class="nav-link"><i class="undefined"></i>
+  ブロックチェーン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav></div></header> <div class="sidebar-mask" data-v-1156296a></div> <aside class="sidebar" data-v-1156296a><div class="personal-info-wrapper" data-v-828910c6 data-v-1156296a><img src="/sushi.JPG" alt="author-avatar" class="personal-img" data-v-828910c6> <h3 class="name" data-v-828910c6>
+    momosuke
+  </h3> <div class="num" data-v-828910c6><div data-v-828910c6><h3 data-v-828910c6>20</h3> <h6 data-v-828910c6>文章</h6></div> <div data-v-828910c6><h3 data-v-828910c6>29</h3> <h6 data-v-828910c6>ラベル</h6></div></div> <ul class="social-links" data-v-828910c6></ul> <hr data-v-828910c6></div> <nav class="nav-links"><div class="nav-item"><a href="/" class="nav-link"><i class="iconfont reco-home"></i>
+  Home
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-category"></i>
+      Category
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/categories/ブロックチェーン/" class="nav-link"><i class="undefined"></i>
+  ブロックチェーン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/インターン/" class="nav-link"><i class="undefined"></i>
+  インターン
+</a></li><li class="dropdown-item"><!----> <a href="/categories/日常/" class="nav-link"><i class="undefined"></i>
+  日常
+</a></li><li class="dropdown-item"><!----> <a href="/categories/プログラミング/" class="nav-link"><i class="undefined"></i>
+  プログラミング
+</a></li><li class="dropdown-item"><!----> <a href="/categories/編入/" class="nav-link"><i class="undefined"></i>
+  編入
+</a></li></ul></div></div><div class="nav-item"><a href="/tag/" class="nav-link"><i class="iconfont reco-tag"></i>
+  Tag
+</a></div><div class="nav-item"><a href="/timeline/" class="nav-link"><i class="iconfont reco-date"></i>
+  TimeLine
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><a class="dropdown-title"><span class="title"><i class="iconfont reco-message"></i>
+      Contact
+    </span> <span class="arrow right"></span></a> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="https://github.com/ry0y4n" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-github"></i>
+  GitHub
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li><li class="dropdown-item"><!----> <a href="https://mobile.twitter.com/AnoTensai" target="_blank" rel="noopener noreferrer" class="nav-link external"><i class="iconfont reco-twitter"></i>
+  twitter
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul></div></div> <!----></nav> <!----> </aside> <div class="password-shadow password-wrapper-in" style="display:none;" data-v-4e82dffc data-v-1156296a><h3 class="title" data-v-4e82dffc data-v-4e82dffc>React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④</h3> <!----> <label id="box" class="inputBox" data-v-4e82dffc data-v-4e82dffc><input type="password" value="" data-v-4e82dffc> <span data-v-4e82dffc>Konck! Knock!</span> <button data-v-4e82dffc>OK</button></label> <div class="footer" data-v-4e82dffc data-v-4e82dffc><span data-v-4e82dffc><i class="iconfont reco-theme" data-v-4e82dffc></i> <a target="blank" href="https://vuepress-theme-reco.recoluan.com" data-v-4e82dffc>vuePress-theme-reco</a></span> <span data-v-4e82dffc><i class="iconfont reco-copyright" data-v-4e82dffc></i> <a data-v-4e82dffc><span data-v-4e82dffc>momosuke</span>
+            
+          <span data-v-4e82dffc>2019 - </span>
+          2021
+        </a></span></div></div> <div data-v-1156296a><main class="page"><section><div class="page-title"><h1 class="title">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④</h1> <div data-v-1ff7123e><i class="iconfont reco-account" data-v-1ff7123e><span data-v-1ff7123e>momosuke</span></i> <i class="iconfont reco-date" data-v-1ff7123e><span data-v-1ff7123e>2020-1-9</span></i> <!----> <i class="tags iconfont reco-tag" data-v-1ff7123e><span class="tag-item" data-v-1ff7123e>React</span><span class="tag-item" data-v-1ff7123e>Redux</span><span class="tag-item" data-v-1ff7123e>Firebase</span></i></div></div> <div class="theme-reco-content content__default"><p>前回では<code>Firebase Authentication</code>を使ってログイン機能の実装と周辺機能の実装を終えた．</p> <p>今回は遂に完成させてデプロイまでいく．</p> <p><a href="/views/programming/2020/010601.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発①</a></p> <p><a href="/views/programming/2020/010701.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発②</a></p> <p><a href="/views/programming/2020/010801.html">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発③</a></p> <p><a href="">React + Redux + Firebase を使ってログイン機能あり掲示板アプリ開発④</a>　←今ここ！！！</p> <h2 id="タイムスタンプを適切な時間フォーマットへ"><a href="#タイムスタンプを適切な時間フォーマットへ" class="header-anchor">#</a> タイムスタンプを適切な時間フォーマットへ</h2> <p>コンテンツ外観はかなり煮詰まってきたが，<code>ProjectSummary</code>と<code>ProjectDetails</code>での日付・時間表示がハードコーディングのままだ．</p> <p>思い出して欲しいのは新しいプロジェクトを追加した時に<code>createdAt</code>というフィールドを<code>firestore</code>の<code>projects</code>コレクションに保存したはずだ．この値は<code>タイムスタンプ</code>だ．</p> <p>これを適切なフォーマットに変換して表示するように，まずは<code>ProjectSummary</code>から修正していこう．</p> <p><code>toDate()</code>メソッドはタイムスタンプをうまく変換してくれるが，こいつは<code>Dateオブジェクト</code>と呼ばれるものなのでこのままだとエラーが出る．</p> <p>なので<code>toString()</code>メソッドで文字列に変換してあげる．</p> <p>後，<code>projects</code>の中にテスト用に作った<code>createdAt</code>プロパティを持たないドキュメントがあるので手動で削除しよう．しないとエラーが出る．</p> <div class="language-projects/ProjectsSummary.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const ProjectSummary = ({project}) =&gt; {
+    return (
+        &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+            &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                &lt;span className=&quot;card-title&quot;&gt;{project.title}&lt;/span&gt;
+                &lt;p&gt;Posted by the {project.authorFirstName} {project.authorLastName}&lt;/p&gt;
+                &lt;p className=&quot;grey-text&quot;&gt;{project.createdAt.toDate().toString()}&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectSummary;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><img width="1680" alt="スクリーンショット 2019-10-28 22.22.16.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/03e4209f-ae6a-47ca-e6d1-c6c2135d9d9e.png">
+一応，人間様がみれるフォーマットにはなったが，なんだか不格好だ．
+<p>なので<a href="https://momentjs.com/" target="_blank" rel="noopener noreferrer">Moment.js<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> と呼ばれるパッケージを使ってお好みなフォーマットを実装しよう．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>npm install moment
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>インポートして使ってみる．
+<code>Moment.js</code>ではDateオブジェクトを扱うので<code>toString</code>は消して全体を<code>moment</code>関数で囲み，そこにお好みのメソッドをつける．
+今回は<code>calendar</code>メソッドを使う．他にもたくさん綺麗なフォーマットがあるので公式参照．</p> <div class="language-projects/ProjectSummary.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import moment from 'moment'
+
+const ProjectSummary = ({project}) =&gt; {
+    return (
+        &lt;div className=&quot;card z-depth-0 project-summary&quot;&gt;
+            &lt;div className=&quot;card-content grey-text text-darken-3&quot;&gt;
+                &lt;span className=&quot;card-title&quot;&gt;{project.title}&lt;/span&gt;
+                &lt;p&gt;Posted by the {project.authorFirstName} {project.authorLastName}&lt;/p&gt;
+                &lt;p className=&quot;grey-text&quot;&gt;{moment(project.createdAt.toDate()).calendar()}&lt;/p&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default ProjectSummary;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br></div></div><img width="1680" alt="スクリーンショット 2019-10-28 22.32.50.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/31412d8a-77cf-f452-7407-d1bd31251550.png"> <p>同じことを<code>ProjectDetails</code>にも実装していく．</p> <div class="language-projects/ProjectDetails.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
+import moment from 'moment'
+
+const ProjectDetails = (props) =&gt; {
+    const { project, auth } = props;
+    if (!auth.uid) return &lt;Redirect to='/signin' /&gt;
+    if (project) {
+        return (
+            &lt;div className=&quot;container section project-details&quot;&gt;
+                &lt;div className=&quot;card z-depth-0&quot;&gt;
+                    &lt;div className=&quot;card-content&quot;&gt;
+                        &lt;span className=&quot;card-title&quot;&gt;{ project.title }&lt;/span&gt;
+                        &lt;p&gt;{ project.content }&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;card-action gret lighten-4 grey-text&quot;&gt;
+                        &lt;div&gt;Posted by {project.authorFirstName} {project.authorLastName}&lt;/div&gt;
+                        &lt;div&gt;{moment(project.createdAt.toDate()).calendar()}&lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    } else {
+        return (
+            &lt;div className=&quot;container center&quot;&gt;
+                &lt;p&gt;Loaging project...&lt;/p&gt;
+            &lt;/div&gt;
+        )
+    }
+    
+}
+
+const mapStateToProps = (state, ownProps) =&gt; {
+    const id = ownProps.match.params.id;
+    const projects = state.firestore.data.projects;
+    const project = projects ? projects[id] : null
+    return {
+        project: project,
+        auth: state.firebase.auth
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'projects' }
+    ])
+)(ProjectDetails);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br><span class="line-number">48</span><br><span class="line-number">49</span><br><span class="line-number">50</span><br><span class="line-number">51</span><br></div></div><img width="1680" alt="スクリーンショット 2019-10-28 22.35.08.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/1815a185-d876-9a67-9329-f2ee452b2dc8.png"> <h2 id="firestoreセキュリティルール"><a href="#firestoreセキュリティルール" class="header-anchor">#</a> Firestoreセキュリティルール</h2> <p>今，<code>Firestore</code>はテストモードなので，誰でも読み書きが可能な状態にある．</p> <p>現在のfirestoreのセキュリティルールをみると以下のようになっている．</p> <img width="1680" alt="スクリーンショット 2019-10-28 22.40.09.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/6d0eba6e-0020-e960-f6c7-e0974fe2600f.png">
+1行目はセキュリティルール言語のバージョン情報なのであまり気にしないでいい．
+2行目はルールが`firestore`データベースのみに適用されることを表している．
+3行目はルールがプロジェクト内の全ての`firestore`データベース（我々は元々1つしかないけど）に適用されることを表している．
+<p>なのでこの3行には手を加えないでいい．</p> <p>4行目はルールがデータベースの全てのドキュメントに適用されることを表している．
+5行目はデータベースの全てのドキュメントが誰にでも読み書き可能であることを設定している．</p> <p>この設定は開発にはとても快適だが，いざデプロイする際には絶対にセキュリティをロックする必要がある．</p> <p>シミュレータを使用して様々な状況をシミュレーションできる．
+<img width="1680" alt="スクリーンショット 2019-10-28 22.55.06.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/5715d492-ee65-2d21-c5d8-8571b95faa06.png">
+上画像では特定のプロジェクトの情報をログインしていないユーザーが<code>GET</code>リクエストした場合のシミュレートだが，しっかりアクセスできてしまっている．</p> <p>こんな感じでこのままだとデータベース内の情報にアクセスされるだけでなく，更新や削除もされてしまう危険性がある．</p> <p>なので早速セキュリティルールを書き換えていこう．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{project} {
+      allow read, write: if request.auth.uid != null
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>4行目はルールを<code>projects</code>コレクションの全てのドキュメントに適用することを表している．
+5行目で<code>request.auth.uid</code>でログインステータスを確認し，ログインしているユーザーには読み込みと書き込みを許可している．</p> <p>次に<code>users</code>コレクションに対するルールも作っていく．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{project} {
+      allow read, write: if request.auth.uid != null
+    }
+    match /users/{useId} {
+      allow create 
+      allow read: if request.auth.uid != null
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br></div></div><p>7行目はルールが<code>users</code>コレクションの全てのドキュメントにも適用されることを表している．
+8行目は誰でもユーザーを登録することを許可している．
+9行目はログインしているユーザーなら他のユーザー情報をみることを許可している．（ダッシュボード画面で他人のプロジェクトが見られるように）</p> <p>以上のルールを書き込み<code>公開</code>を押す．適用には数分かかることがあるので，少し待ってプロジェクトを作ったりしてアプリの動作がおかしくなってないか確認しよう．</p> <p>今回実装してセキュリティルールはとても基本的なことだけなので，実際の開発では<a href="https://firebase.google.com/docs/rules?authuser=0" target="_blank" rel="noopener noreferrer">公式ドキュメント<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>を読んで他にどんなルールを敷けるのか調べてみよう．</p> <p>#Cloud Functionイントロ＆セットアップ
+ここまででReact Appを作ってきたが，ここまでのJavaScriptコードが全てクライアントサイド，ブラウザで実行されるものだ．コードを実行するのにサーバーを使用しなかった．</p> <p>しかしいくつかのタスクに取り組むに際してサーバーサイドでコードを実行したい時が出てくる．</p> <p>例えばクライアントサイドからはアクセスできないデータの編集などだ．</p> <p>そのために<code>Cloud Function</code>を使えばコードをサーバーサイドで実行してくれる．
+ローカルでコードを書いてfirebaseにデプロイするだけでいい．</p> <p>それでは書く前に<code>Cloud Function</code>のセットアップをしていこう．</p> <p>Firebaseプロジェクトの<code>functions</code>ページに行って<code>使ってみる</code>をクリックすると，cloud functionを使うためのステップが出てくるの1つ1つやっていこう．</p> <p>まず<code>firebase-tools</code>のインストール</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>npm install -g firebase-tools
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>次に<code>firebase init</code>と<code>firebaes deploy</code>しろと出てくるが，その前にログインしないといけない．
+もし初回ログインなら，ブラウザが開くと思う．
+このコマンドによりローカルマシンが Firebase に接続され，Firebase プロジェクトへのアクセスが許可される．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>firebase login
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>次に<code>firebase init</code>でfirebaseプロジェクトをフロントエンド側で初期化して<code>deploy</code>するための準備をする．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>firebase init
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><code>Which Firebase CLI features do you want to set up for this folder? Press Space to select features, then Enter to confirm your choices.</code>のところは<code>Function</code>と<code>Hosting</code>だけを選択しよう．</p> <p><code>Firestore</code>を選択しないのはもうオンライン上でルールを設定しデプロイしたからだ．</p> <p>次のところは<code>Use an existing project</code>を選択．
+次のところは今回作成しているfirebaseプロジェクトを選択．
+次のところは<code>JavaScript</code>を選択
+次のところは<code>no</code>を選択
+次のところは<code>yes</code>を選択
+次のところは<code>build</code>を選択
+次のところは<code>no</code>を選択</p> <p>これでセットアップが完了した．アプリに<code>functions</code>ファイルができていると思う．ここに<code>Cloud Function</code>用のコードを書いてデプロイする．</p> <h2 id="シンプルなcloud-fucntionを書いてみる"><a href="#シンプルなcloud-fucntionを書いてみる" class="header-anchor">#</a> シンプルなCloud Fucntionを書いてみる</h2> <p>まず<code>functions</code>フォルダにある<code>index.js</code>にあらかじめ用意されたダミーコードを説いていく．</p> <p>1行目でモジュールをインポートしている．このモジュールの様々なプロパティを使ってコードを書いていく．</p> <p>node.jsを書いたことのある人には馴染みやすいコードだと思う．特にexpressを書いたことのある人には．</p> <div class="language-functions/index.js line-numbers-mode"><pre class="language-text"><code>const functions = require('firebase-functions');
+
+// // Create and Deploy Your First Cloud Functions
+// // https://firebase.google.com/docs/functions/write-firebase-functions
+//
+exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+ response.send(&quot;Hello, ninjas!&quot;);
+});
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br></div></div><p>この状態でfunctionsだけをデプロイしてみる．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>firebase deploy --only functions
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>デプロイ後に表示されるURLで<code>Cloud Function</code>が実行できるのでアクセスしてみよう．
+<img width="1680" alt="スクリーンショット 2019-10-29 0.21.08.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/d67c2b1b-bd0a-2c02-d1f7-5e7bb31b59cc.png">
+firebaseプロジェクトのfuncionsページでも確認します．
+<code>helloWorld</code>という関数が<code>HTTPリクエスト</code>をトリガーに実行されることがちゃんと書いてある．
+<img width="1680" alt="スクリーンショット 2019-10-29 0.22.10.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/f098d7a5-1b49-eeee-aa52-89682fc4685b.png">
+ということでとりあえず<code>Cloud Fucntion</code>の基礎がわかったところで次は<code>Cloud Function</code>を使って，<code>Notifications</code>の実装に取り組んでいきたいと思う．
+Notificationsは誰かがサインアップしたりプロジェクトを作ったことをトリガーに通知するパネルのようなものである．</p> <h2 id="notificationコンポネント"><a href="#notificationコンポネント" class="header-anchor">#</a> Notificationコンポネント</h2> <p>具体的に何をトリガーにするかというと，誰かが<code>projects</code>コレクションにドキュメントを追加した時か，誰かが<code>Firebase Authentication</code>を使ってサインアップしたことをトリガーにしたい．</p> <p>とはいえ現時点での<code>Notification</code>コンポネントはあまりに質素すぎるので，<code>Cloud Function</code>云々よりまずコンポネントの外観を作っていこう．</p> <div class="language-dashboard/Notification.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+
+const Notification = (props) =&gt; {
+    return (
+        &lt;div className=&quot;section&quot;&gt;
+            &lt;div className=&quot;card z-depth-0&quot;&gt;
+                &lt;div className=&quot;card-content&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Notifications&lt;/span&gt;
+                    &lt;ul className=&quot;notifications&quot;&gt;
+                        &lt;li&gt;Notification&lt;/li&gt;
+                        &lt;li&gt;Notification&lt;/li&gt;
+                        &lt;li&gt;Notification&lt;/li&gt;
+                        &lt;li&gt;Notification&lt;/li&gt;
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default Notification;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br></div></div><p>これで外観はいい感じなので，次から実際にCloud Funcitonを書いていこうと思う．</p> <h2 id="firestoreのトリガー設定1"><a href="#firestoreのトリガー設定1" class="header-anchor">#</a> Firestoreのトリガー設定①</h2> <p><code>Cloud Function</code>で2つの関数を実装していきたい．</p> <p>1つはユーザーが新しいプロジェクトを作成した時，2つ目は新しいユーザーがサインアップした時をトリガーにする関数だ．</p> <p>まずは前者に関する関数を実装していこう．</p> <p><code>firebase</code>内で他のサービス（AuthやFirestore）にアクセスするためにはまず<code>firebase-admin</code>をインポートして初期化する必要がある．</p> <p><code>projectCreated</code>という関数を作成する．
+詳しく知りたい人は<a href="https://firebase.google.com/docs/functions/firestore-events?hl=ja" target="_blank" rel="noopener noreferrer">Cloud Functions 公式ドキュメント<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>を参照して欲しいのだが，ここでは<code>projects</code>コレクションに新しいドキュメントが作られたことをトリガーに設定している．</p> <p>中では，<code>doc</code>というレスポンスを使って<code>notification</code>オブジェクトを作成している．</p> <div class="language-functions/index.js line-numbers-mode"><pre class="language-text"><code>const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase)
+
+exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+ response.send(&quot;Hello, ninjas!&quot;);
+});
+
+exports.projectCreated = functions.firestore
+    .document('projects/{projectId}')
+    .onCreate(doc =&gt; {
+
+        const project = doc.data();
+        const notification = {
+            content: 'Added a new project',
+            user: `${project.authorFirstName} ${project.authorLastName}`,
+            time: admin.firestore.FieldValue.serverTimestamp()
+        }
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br></div></div><p>ここまではトリガーと前処理しか書いていない．
+あとはこの<code>notification</code>オブジェクトをfirestoreの<code>notifications</code>コレクションに追加したい．</p> <p>そこで<code>notifications</code>コレクションにドキュメントを追加する関数を外側に定義して<code>projectCreated</code>で呼び出してあげよう．
+この関数は単に<code>projectCreated</code>で呼び出すだけのものなので，Cloud Functions用の関数の書き方でなく，通常のJS文法でかける．
+なお，Cloud Functions用の関数は何かしらのレスポンスが必要なので<code>return</code>する形で関数を呼び出している．</p> <div class="language-functions/index.js line-numbers-mode"><pre class="language-text"><code>const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase)
+
+exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+ response.send(&quot;Hello, ninjas!&quot;);
+});
+
+const createNotification = (notification =&gt; {
+    return admin.firestore().collection('notifications')
+        .add(notification)
+        .then(doc =&gt; console.log('notification added', doc));
+})
+
+exports.projectCreated = functions.firestore
+    .document('projects/{projectId}')
+    .onCreate(doc =&gt; {
+
+        const project = doc.data();
+        const notification = {
+            content: 'Added a new project',
+            user: `${project.authorFirstName} ${project.authorLastName}`,
+            time: admin.firestore.FieldValue.serverTimestamp()
+        }
+
+        return createNotification(Notification)
+
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br></div></div><p>それではこの関数をデプロイして確認してみよう．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>firebase deploy --only functions
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><img width="1680" alt="スクリーンショット 2019-10-29 10.10.21.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/f3aab8b7-e822-c68e-6081-de864adb1917.png">
+ちゃんとトリガーが起動するかどうか確かめるために新しいプロジェクトを作ってみよう．
+<img width="1680" alt="スクリーンショット 2019-10-29 10.12.11.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/3211e4bf-54af-04b8-520e-f52e1335d99f.png"> <img width="1680" alt="スクリーンショット 2019-10-29 10.16.09.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/4dc5c360-0a3f-3b54-1131-42e8b5f74e34.png"> <h2 id="firestoreのトリガー設定2"><a href="#firestoreのトリガー設定2" class="header-anchor">#</a> Firestoreのトリガー設定②</h2> <p>次は誰かがサインアップしたことをトリガーにする関数を実装していく．</p> <p>ここでも詳しい説明は<a href="https://firebase.google.com/docs/functions/firestore-events?hl=ja" target="_blank" rel="noopener noreferrer">Cloud Functions 公式ドキュメント<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>に任せて，概要を説明していく．</p> <p>新しいユーザーが作られたことをトリガーに<code>.doc(user.uid).get()</code>で作られたユーザーの情報を<code>users</code>コレクションから取ってきて，データを元に<code>notification</code>オブジェクトを作成．それを<code>createNotification</code>関数へ渡す．</p> <div class="language-functions/index.js line-numbers-mode"><pre class="language-text"><code>const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+admin.initializeApp(functions.config().firebase)
+
+exports.helloWorld = functions.https.onRequest((request, response) =&gt; {
+ response.send(&quot;Hello, ninjas!&quot;);
+});
+
+const createNotification = (notification =&gt; {
+    return admin.firestore().collection('notifications')
+        .add(notification)
+        .then(doc =&gt; console.log('notification added', doc));
+})
+
+exports.projectCreated = functions.firestore
+    .document('projects/{projectId}')
+    .onCreate(doc =&gt; {
+
+        const project = doc.data();
+        const notification = {
+            content: 'Added a new project',
+            user: `${project.authorFirstName} ${project.authorLastName}`,
+            time: admin.firestore.FieldValue.serverTimestamp()
+        }
+
+        return createNotification(notification);
+
+})
+
+exports.userJoined = functions.auth.user()
+    .onCreate(user =&gt; {
+
+        return admin.firestore().collection('users')
+            .doc(user.uid).get().then(doc =&gt; {
+                
+                const newUser = doc.data();
+                const notification = {
+                    content: 'Joined the party',
+                    user: `${newUser.firstName} ${newUser.lastName}`,
+                    time: admin.firestore.FieldValue.serverTimestamp()
+                }
+
+                return createNotification(notification);
+
+            })
+
+})
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br><span class="line-number">44</span><br><span class="line-number">45</span><br><span class="line-number">46</span><br><span class="line-number">47</span><br></div></div><p>先ほどと同じようにデプロイして確認してみよう．</p> <div class="language-terminal line-numbers-mode"><pre class="language-text"><code>firebase deploy --only functions
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><img width="1680" alt="スクリーンショット 2019-10-29 10.35.21.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/e9cc9df4-5c85-cd8d-df5d-c80e173394ac.png">
+ユーザーを作ってみて`notifications`コレクションに適切に保存されるか確認しよう．
+<img width="1680" alt="スクリーンショット 2019-10-29 10.45.04.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/9bc8d7ed-b2e8-6b81-0b7e-21779e44c28f.png"> <img width="1680" alt="スクリーンショット 2019-10-29 10.46.02.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/3af7da06-0c6c-c633-1cb8-d875742431bb.png"> <h2 id="notification表示"><a href="#notification表示" class="header-anchor">#</a> Notification表示</h2> <p>あとは<code>notifications</code>コレクションのドキュメントを取得して<code>Notification</code>コンポネントで表示してやろう．</p> <p>そのためにはこのコンポネントとRedux<code>state</code>とを<code>connect</code>しないといけない．
+<code>Notification</code>をラップしている<code>Dashboard</code>ではすでにつながっているので後は<code>notifications</code>コレクションとの同期をするだけだ．</p> <p>特定の数（3）しか通知を表示したくないので<code>limit</code>を3に設定した．</p> <div class="language-dashboard/Dashboard.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import Notification from './Notification'
+import ProjectList from '../projects/ProjectList'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
+
+class Dashboard extends Component {
+    render() {
+        const { projects, auth, notifications } = this.props;
+        if (!auth.uid) return &lt;Redirect to='/signin' /&gt;
+
+        return (
+            &lt;div className=&quot;dashboard container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col s12 m6&quot;&gt;
+                        &lt;ProjectList projects={projects} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;col s12 m5 offset-m1&quot;&gt;
+                        &lt;Notification notifications={notifications} /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+const mapStateToProps = (state) =&gt; {
+    return {
+        projects: state.firestore.ordered.projects,
+        auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'projects' },
+        { collection: 'notifications', limit: 3 }
+    ])
+)(Dashboard);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><p>後は<code>Notification</code>コンポネント側で適切に処理する．</p> <div class="language-dashboard/Notification.js line-numbers-mode"><pre class="language-text"><code>import React from 'react'
+import moment from 'moment'
+
+const Notification = (props) =&gt; {
+    const { notifications } = props;
+    return (
+        &lt;div className=&quot;section&quot;&gt;
+            &lt;div className=&quot;card z-depth-0&quot;&gt;
+                &lt;div className=&quot;card-content&quot;&gt;
+                    &lt;span className=&quot;card-title&quot;&gt;Notifications&lt;/span&gt;
+                    &lt;ul className=&quot;notifications&quot;&gt;
+                        { notifications &amp;&amp; notifications.map(item =&gt; {
+                            return (
+                                &lt;li key={item.id}&gt;
+                                    &lt;span className=&quot;pink-text&quot;&gt;{item.user} &lt;/span&gt;
+                                    &lt;span&gt;{item.content}&lt;/span&gt;
+                                    &lt;div className=&quot;grey-text note-date&quot;&gt;
+                                        {moment(item.time.toDate()).fromNow()}
+                                    &lt;/div&gt;
+                                &lt;/li&gt;
+                            )
+                        })}
+                    &lt;/ul&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default Notification;
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br></div></div><p>これでもう終わりに見えるが，実はまだやってないことがある．
+<code>notifications</code>コレクションのセキュリティルールを設定していないのだ．
+なのでこの状態ではエラーが出ると思う．</p> <p>ということでルールを実装していこう．</p> <p>ログインしているユーザーならいかなる<code>notification</code>データを読めるようにする．そうしないと<code>Notification</code>コンポネントのところが見れなくなってしまう．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /projects/{project} {
+      allow read, write: if request.auth.uid != null
+    }
+    match /users/{useId} {
+    	allow create 
+      allow read: if request.auth.uid != null
+    }
+    match /notifications/{notification} {
+      allow read: if request.auth.uid != null
+    }
+  }
+}
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br></div></div><p>これでうまく表示されるはずだ．新しいプロジェクトを追加してみて数秒後に<code>Notification</code>の載るかどうか確認してみよう．
+<img width="1680" alt="スクリーンショット 2019-10-29 11.08.50.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/63a51bd6-e2a5-b4d8-8f67-ee7fe671c9bf.png"></p> <h2 id="データの順番"><a href="#データの順番" class="header-anchor">#</a> データの順番</h2> <p>実装中に気づいていた人も多いだろう．</p> <p>今の段階では<code>ProjectList</code>も<code>Notification</code>もランダムな順番でデータを羅列しているのだ．
+プロジェクト一覧はまだしも通知欄がランダムに3つ取ってくるようでは致命的にダメだろう．</p> <p>今回はその問題を解決していきたいと思う．</p> <p>方法はめちゃくちゃ簡単だ．</p> <p><code>Dashboard</code>の<code>firestoreConnect</code>のところで<code>orderBy</code>で基準にしたいプロパティ整列の方向を指定してあげるだけだ．</p> <div class="language-dashboard/Dashboard.js line-numbers-mode"><pre class="language-text"><code>import React, { Component } from 'react'
+import Notification from './Notification'
+import ProjectList from '../projects/ProjectList'
+import { connect } from 'react-redux'
+import { firestoreConnect } from 'react-redux-firebase'
+import { compose } from 'redux'
+import { Redirect } from 'react-router-dom'
+
+class Dashboard extends Component {
+    render() {
+        const { projects, auth, notifications } = this.props;
+        if (!auth.uid) return &lt;Redirect to='/signin' /&gt;
+
+        return (
+            &lt;div className=&quot;dashboard container&quot;&gt;
+                &lt;div className=&quot;row&quot;&gt;
+                    &lt;div className=&quot;col s12 m6&quot;&gt;
+                        &lt;ProjectList projects={projects} /&gt;
+                    &lt;/div&gt;
+                    &lt;div className=&quot;col s12 m5 offset-m1&quot;&gt;
+                        &lt;Notification notifications={notifications} /&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+        )
+    }
+}
+
+const mapStateToProps = (state) =&gt; {
+    return {
+        projects: state.firestore.ordered.projects,
+        auth: state.firebase.auth,
+        notifications: state.firestore.ordered.notifications
+    }
+}
+
+export default compose(
+    connect(mapStateToProps),
+    firestoreConnect([
+        { collection: 'projects', orderBy: ['createdAt', 'desc'] },
+        { collection: 'notifications', limit: 3, orderBy: ['time', 'desc'] }
+    ])
+)(Dashboard);
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br><span class="line-number">2</span><br><span class="line-number">3</span><br><span class="line-number">4</span><br><span class="line-number">5</span><br><span class="line-number">6</span><br><span class="line-number">7</span><br><span class="line-number">8</span><br><span class="line-number">9</span><br><span class="line-number">10</span><br><span class="line-number">11</span><br><span class="line-number">12</span><br><span class="line-number">13</span><br><span class="line-number">14</span><br><span class="line-number">15</span><br><span class="line-number">16</span><br><span class="line-number">17</span><br><span class="line-number">18</span><br><span class="line-number">19</span><br><span class="line-number">20</span><br><span class="line-number">21</span><br><span class="line-number">22</span><br><span class="line-number">23</span><br><span class="line-number">24</span><br><span class="line-number">25</span><br><span class="line-number">26</span><br><span class="line-number">27</span><br><span class="line-number">28</span><br><span class="line-number">29</span><br><span class="line-number">30</span><br><span class="line-number">31</span><br><span class="line-number">32</span><br><span class="line-number">33</span><br><span class="line-number">34</span><br><span class="line-number">35</span><br><span class="line-number">36</span><br><span class="line-number">37</span><br><span class="line-number">38</span><br><span class="line-number">39</span><br><span class="line-number">40</span><br><span class="line-number">41</span><br><span class="line-number">42</span><br><span class="line-number">43</span><br></div></div><p>新しいプロジェクトを作ってみて，プロジェクト一覧のトップに表示されるかどうか，通知欄のトップの表示されるかを確認してみよう．
+<img width="1680" alt="スクリーンショット 2019-10-29 11.20.59.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/6fbafd2c-d450-6dc5-ec98-c3de36b07ffc.png"></p> <h2 id="firebase-hostingへデプロイ"><a href="#firebase-hostingへデプロイ" class="header-anchor">#</a> Firebase Hostingへデプロイ</h2> <p>ついにアプリが完成した．後は<code>Firebase Hosting</code>へアプリをデプロイするだけだ．</p> <p>まずは<code>Firebase Hosting</code>のセットアップから始めよう．</p> <p>FirebaseプロジェクトのHostingページへいき，<code>始める</code>を押して設定を進めていこう．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>npm install -g firebase-tools
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>も</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>firebase login
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>も</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>firebase init
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>もすでにやっているので後は</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>firebase deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>だけなのだが，その前にいくつかやることがある．アプリをビルドしないといけない．</p> <p>なので以下のコマンドを打っていこう．</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>npm run build
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p>するとアプリ内にデプロイするための<code>build</code>フォルダが作られる．</p> <p>よし準備は全て整った！デプロイしよう！</p> <div class="language- line-numbers-mode"><pre class="language-text"><code>firebase deploy
+</code></pre> <div class="line-numbers-wrapper"><span class="line-number">1</span><br></div></div><p><code>deploy complete!</code>と出たら君の勝ちだ．</p> <p>Firebase Hostingページに表示されたURLにアクセスしてリダイレクトされたログイン画面が表示されれば完全勝利だ！
+ログインして動作確認してみるといい．
+<img width="1680" alt="スクリーンショット 2019-10-29 11.33.16.png" src="https://qiita-image-store.s3.ap-northeast-1.amazonaws.com/0/331294/17b70378-ea6d-d201-5a9f-5fd71f9c9531.png"></p> <h2 id="終わりに"><a href="#終わりに" class="header-anchor">#</a> 終わりに</h2> <p>自分が偉いなんて思ってないことを大前提に，こういう海外の方が作られた英語コンテンツを翻訳・まとめてQiitaに流すのは倫理的にどうなのか少し悩みながらも，すごくよく出来た教材なので日本語ドキュメントとして共有した．</p> <p>今後も同じように海外コンテンツのまとめはしていきたいのだが，このようにQiitaに流すのはアリなのだろうか？</p></div></section> <footer class="page-edit"><!----> <!----></footer> <!----> <div class="comments-wrapper"><!----></div> <ul class="side-bar sub-sidebar-wrapper" style="width:12rem;" data-v-70334359><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#タイムスタンプを適切な時間フォーマットへ" class="sidebar-link reco-side-タイムスタンプを適切な時間フォーマットへ" data-v-70334359>タイムスタンプを適切な時間フォーマットへ</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#firestoreセキュリティルール" class="sidebar-link reco-side-firestoreセキュリティルール" data-v-70334359>Firestoreセキュリティルール</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#シンプルなcloud-fucntionを書いてみる" class="sidebar-link reco-side-シンプルなcloud-fucntionを書いてみる" data-v-70334359>シンプルなCloud Fucntionを書いてみる</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#notificationコンポネント" class="sidebar-link reco-side-notificationコンポネント" data-v-70334359>Notificationコンポネント</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#firestoreのトリガー設定1" class="sidebar-link reco-side-firestoreのトリガー設定1" data-v-70334359>Firestoreのトリガー設定①</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#firestoreのトリガー設定2" class="sidebar-link reco-side-firestoreのトリガー設定2" data-v-70334359>Firestoreのトリガー設定②</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#notification表示" class="sidebar-link reco-side-notification表示" data-v-70334359>Notification表示</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#データの順番" class="sidebar-link reco-side-データの順番" data-v-70334359>データの順番</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#firebase-hostingへデプロイ" class="sidebar-link reco-side-firebase-hostingへデプロイ" data-v-70334359>Firebase Hostingへデプロイ</a></li><li class="level-2" data-v-70334359><a href="/views/programming/2020/010901.html#終わりに" class="sidebar-link reco-side-終わりに" data-v-70334359>終わりに</a></li></ul></main> <!----></div></div></div></div><div class="global-ui"><div class="back-to-ceiling" style="right:1rem;bottom:6rem;width:2.5rem;height:2.5rem;border-radius:.25rem;line-height:2.5rem;display:none;" data-v-c6073ba8 data-v-c6073ba8><svg t="1574745035067" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="5404" class="icon" data-v-c6073ba8><path d="M526.60727968 10.90185116a27.675 27.675 0 0 0-29.21455937 0c-131.36607665 82.28402758-218.69155461 228.01873535-218.69155402 394.07834331a462.20625001 462.20625001 0 0 0 5.36959153 69.94390903c1.00431239 6.55289093-0.34802892 13.13561351-3.76865779 18.80351572-32.63518765 54.11355614-51.75690182 118.55860487-51.7569018 187.94566865a371.06718723 371.06718723 0 0 0 11.50484808 91.98906777c6.53300375 25.50556257 41.68394495 28.14064038 52.69160883 4.22606766 17.37162448-37.73630017 42.14135425-72.50938081 72.80769204-103.21549295 2.18761121 3.04276886 4.15646224 6.24463696 6.40373557 9.22774369a1871.4375 1871.4375 0 0 0 140.04691725 5.34970492 1866.36093723 1866.36093723 0 0 0 140.04691723-5.34970492c2.24727335-2.98310674 4.21612437-6.18497483 6.3937923-9.2178004 30.66633723 30.70611158 55.4360664 65.4791928 72.80769147 103.21549355 11.00766384 23.91457269 46.15860503 21.27949489 52.69160879-4.22606768a371.15156223 371.15156223 0 0 0 11.514792-91.99901164c0-69.36717486-19.13165746-133.82216804-51.75690182-187.92578088-3.42062944-5.66790279-4.76302748-12.26056868-3.76865837-18.80351632a462.20625001 462.20625001 0 0 0 5.36959269-69.943909c-0.00994388-166.08943902-87.32547796-311.81420293-218.6915546-394.09823051zM605.93803103 357.87693858a93.93749974 93.93749974 0 1 1-187.89594924 6.1e-7 93.93749974 93.93749974 0 0 1 187.89594924-6.1e-7z" p-id="5405" data-v-c6073ba8></path><path d="M429.50777625 765.63860547C429.50777625 803.39355007 466.44236686 1000.39046097 512.00932183 1000.39046097c45.56695499 0 82.4922232-197.00623328 82.5015456-234.7518555 0-37.75494459-36.9345906-68.35043303-82.4922232-68.34111062-45.57627738-0.00932239-82.52019037 30.59548842-82.51086798 68.34111062z" p-id="5406" data-v-c6073ba8></path></svg></div></div></div>
+    <script src="/assets/js/app.7d2482f9.js" defer></script><script src="/assets/js/3.272f7630.js" defer></script><script src="/assets/js/1.55db5d3f.js" defer></script><script src="/assets/js/25.cc3ffec5.js" defer></script>
+  </body>
+</html>
