@@ -17,7 +17,7 @@ module.exports = {
         "content": "width=device-width,initial-scale=1,user-scalable=no"
       }
     ],
-    ["script", { src: "temp.js" }]
+    // ["script", { src: "temp.js" }]
   ],
   "theme": "reco",
   "themeConfig": {
