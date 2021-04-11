@@ -2,12 +2,16 @@ module.exports = {
   title: "#ベランダ de 音楽",
   description: "ーーーーーーーーーーーーー",
   locales: {
-    '/': {
-      lang: 'ja-JP',
+    "/": {
+      lang: "ja-JP",
     },
   },
   dest: "public",
   head: [
+    [
+      //pwa 用のmanifest.json
+      ["link", { rel: "manifest", href: "/manifest.json" }],
+    ],
     [
       "link",
       {
@@ -25,7 +29,7 @@ module.exports = {
   ],
   theme: "reco",
   themeConfig: {
-    lang: 'ja-JP',
+    lang: "ja-JP",
     smoothScroll: "true",
     nav: [
       {
@@ -77,5 +81,14 @@ module.exports = {
   },
   markdown: {
     lineNumbers: true
-  }
+  },
+  plugins: {
+    "@vuepress/pwa": {
+        serviceWorker: true,
+        updatePopup: {
+            message: "New content is available.",
+            buttonText: "Refresh"
+        }
+    }
+}
 }
