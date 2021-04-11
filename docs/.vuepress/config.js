@@ -1,6 +1,6 @@
 module.exports = {
-  title: "Momo Blog",
-  description: "日々考えていることを落としておくためのサイト",
+  title: "#ベランダ de 音楽",
+  description: "ーーーーーーーーーーーーー",
   locales: {
     '/': {
       lang: 'ja-JP',
@@ -12,7 +12,7 @@ module.exports = {
       "link",
       {
         rel: "icon",
-        href: "/favicon.ico"
+        href: "/sushi-favicon.ico"
       }
     ],
     [
@@ -66,7 +66,7 @@ module.exports = {
         text: "Tag"
       }
     },
-    logo: "/logo.png",
+    logo: "/sushi.JPG",
     search: true,
     searchMaxSuggestions: 10,
     sidebar: "auto",
